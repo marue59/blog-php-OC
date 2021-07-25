@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" href="">
+        {% block stylesheet %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+            <link rel="stylesheet" href="">
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block nav  %}
+        {% endblock %}
+
+        <div class="container-fluid">
+            {% block content %}
+                {{page}}        
+            {% endblock %}
+
+        </div>
+
+    </body>
+</html>
+
+
+
+
+
+

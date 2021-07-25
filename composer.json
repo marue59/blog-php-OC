@@ -1,0 +1,19 @@
+{
+    "name": "marie/portfolio",
+    "authors": [
+        {
+            "name": "Marie",
+            "email": "Marue59@hotmail.fr"
+        }
+    ],
+    
+    "require": {
+        "guzzlehttp/psr7": "^2.0",
+        "squizlabs/php_codesniffer": "*",
+        "twig/twig": "^3.3",
+        "altorouter/altorouter": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
