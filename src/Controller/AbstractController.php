@@ -20,7 +20,7 @@ abstract class AbstractController
         $this->twig = new Environment(
             $loader,
             [
-                'cache' =>  __DIR__ . '/../var/cache',
+                'cache' => false, __DIR__ . '/../var/cache',
                 'debug' => true,
             ]
         );

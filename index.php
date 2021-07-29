@@ -20,6 +20,9 @@ $router->map('GET|POST', '/connexion', 'SecurityController#login');
 //account
 $router->map('GET', '/mon-compte', 'AccountController#account');
 
+//whoIam
+$router->map('GET', '/whoIam', 'FrontController#whoIam');
+
 $match = $router->match();
 
 if (stripos($match['target'], '#') !== false) {

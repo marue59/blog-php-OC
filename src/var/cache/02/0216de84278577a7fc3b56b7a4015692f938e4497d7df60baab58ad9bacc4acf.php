@@ -58,13 +58,13 @@ class __TwigTemplate_dc13d75b6460586611f9a6ecec4bafb3c5d149f50b4a2aacef471ddd71d
         ";
         // line 16
         $this->displayBlock('nav', $context, $blocks);
-        // line 18
+        // line 26
         echo "
         <div class=\"container-fluid\">
             ";
-        // line 20
+        // line 28
         $this->displayBlock('content', $context, $blocks);
-        // line 23
+        // line 31
         echo "
         </div>
 
@@ -101,15 +101,23 @@ class __TwigTemplate_dc13d75b6460586611f9a6ecec4bafb3c5d149f50b4a2aacef471ddd71d
     {
         $macros = $this->macros;
         // line 17
-        echo "        ";
+        echo "        <div class=\"row justify-content-end align-items-center pt-3\">
+                            <div class=\"offset-1 offset-xl-2 col text-center\">
+                                <a href=\"index\" title=\"Accueil\" class=\"h6 font-weight-bold\">Accueil</a>
+                            </div>
+                            <div class=\"col text-center\">
+                                <a href='whoIam.html.twig' title=\"whoIam\" class=\"h6 font-weight-bold\">Qui je suis</a>
+                            </div>
+                             
+        ";
     }
 
-    // line 20
+    // line 28
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 21
-        echo "                hello
+        // line 29
+        echo "                test
             ";
     }
 
@@ -120,7 +128,7 @@ class __TwigTemplate_dc13d75b6460586611f9a6ecec4bafb3c5d149f50b4a2aacef471ddd71d
 
     public function getDebugInfo()
     {
-        return array (  112 => 21,  108 => 20,  104 => 17,  100 => 16,  93 => 9,  89 => 8,  83 => 6,  68 => 23,  66 => 20,  62 => 18,  60 => 16,  55 => 13,  53 => 8,  48 => 6,  41 => 1,);
+        return array (  120 => 29,  116 => 28,  104 => 17,  100 => 16,  93 => 9,  89 => 8,  83 => 6,  68 => 31,  66 => 28,  62 => 26,  60 => 16,  55 => 13,  53 => 8,  48 => 6,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -141,11 +149,19 @@ class __TwigTemplate_dc13d75b6460586611f9a6ecec4bafb3c5d149f50b4a2aacef471ddd71d
 
     <body>
         {% block nav  %}
+        <div class=\"row justify-content-end align-items-center pt-3\">
+                            <div class=\"offset-1 offset-xl-2 col text-center\">
+                                <a href=\"index\" title=\"Accueil\" class=\"h6 font-weight-bold\">Accueil</a>
+                            </div>
+                            <div class=\"col text-center\">
+                                <a href='whoIam.html.twig' title=\"whoIam\" class=\"h6 font-weight-bold\">Qui je suis</a>
+                            </div>
+                             
         {% endblock %}
 
         <div class=\"container-fluid\">
             {% block content %}
-                hello
+                test
             {% endblock %}
 
         </div>

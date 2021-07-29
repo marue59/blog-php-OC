@@ -1,6 +1,61 @@
 {% extends'home.html.twig'%}
 
 {% block stylesheets %}
-
+cc
 {% endblock %}
+
+
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" href="">
+        {% block stylesheet %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+            <link rel="stylesheet" href="">
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block nav  %}
+        <div class="row justify-content-end align-items-center pt-3">
+                            <div class="offset-1 offset-xl-2 col text-center">
+                                <a href="{{ path('index') }}" title="Accueil" class="h6 font-weight-bold">Accueil</a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ path('whoIam') }}" title="whoIam" class="h6 font-weight-bold">Qui je suis</a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ path('services') }}" title="Projets" class="h6 font-weight-bold">Mes projets</a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ path('offers') }}" title="Cv" class="h6 font-weight-bold">Mon CV</a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ path('app_login') }}"title="Reseaux" class="h6 font-weight-bold">Mes réseaux</a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ path('add_message') }}" title="Identification" class="h6 font-weight-bold">Mon Compte</a>
+                            </div>
+                        </div>
+        {% endblock %}
+
+        <div class="container-fluid">
+            {% block content %}
+                test
+            {% endblock %}
+
+        </div>
+
+    </body>
+</html>
+
+
+
+
+
+
 
