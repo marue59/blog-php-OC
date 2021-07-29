@@ -20,6 +20,10 @@ class FrontController extends AbstractController {
         echo $this->twig->render('whoIam.html.twig');
     }
 
+    public function project()
+    {
+        echo $this->twig->render('project.html.twig');
+    }
 }
 
 ?>
