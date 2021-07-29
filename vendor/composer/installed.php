@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3b4934028af079fce4f41bd7a3618cbb135cc5bd',
+        'reference' => 'c9f03fbfa9b9fcfbdbfe1d832cf3793c089fd706',
         'name' => 'marie/portfolio',
         'dev' => true,
     ),
@@ -43,7 +43,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3b4934028af079fce4f41bd7a3618cbb135cc5bd',
+            'reference' => 'c9f03fbfa9b9fcfbdbfe1d832cf3793c089fd706',
             'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(

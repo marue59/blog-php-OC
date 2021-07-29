@@ -6,6 +6,14 @@
             "email": "Marue59@hotmail.fr"
         }
     ],
+    "autoload": {
+
+        "psr-4": {
+
+            "Portfolio\\": "src/"
+
+        }
+    },
     
     "require": {
         "guzzlehttp/psr7": "^2.0",

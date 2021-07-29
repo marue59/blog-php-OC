@@ -35,6 +35,7 @@ class ComposerStaticInitd2e3ebd1352be94170ee53b1cdc288dd
         array (
             'Psr\\Http\\Message\\' => 17,
             'Prophecy\\' => 9,
+            'Portfolio\\' => 10,
         ),
         'G' => 
         array (
@@ -78,6 +79,10 @@ class ComposerStaticInitd2e3ebd1352be94170ee53b1cdc288dd
         'Prophecy\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
+        'Portfolio\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
