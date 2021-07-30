@@ -20,9 +20,9 @@ class FrontController extends AbstractController {
         echo $this->twig->render('whoIam.html.twig');
     }
 
-    public function project()
+    public function login()
     {
-        echo $this->twig->render('project.html.twig');
+        echo $this->twig->render('login.html.twig');
     }
 }
 
