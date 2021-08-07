@@ -1,19 +1,14 @@
 <?php
-namespace Portfolio;
-
-use AltoRouter;
-use \PDO;
-use Database;
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
 require 'vendor/autoload.php';
-include 'database.php';
 
-$uri = $_SERVER['REQUEST_URI'];
+require 'config/config.php';
+
+
+
 //Le routing
 $router = new AltoRouter();
 
@@ -48,9 +43,5 @@ if (stripos($match['target'], '#') !== false) {
 } else {
     header('Location: /');
 }
-
-    $db = new \Database();
-    $datas = $db->query('SELECT * FROM user');
-    var_dump($datas);
 
 ?>

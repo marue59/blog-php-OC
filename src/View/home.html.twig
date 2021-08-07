@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   
   
-  <title></title>
+  <title>{% block title %}{% endblock %}</title>
 </head>
 
 
@@ -20,61 +20,57 @@
 
   <!-- The navbar - The <a> elements are used to jump to a section in the scrollable area -->
   <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid ">
-      <a class="navbar-brand" href="#">
-        <img src="public/images/logo.jpg" alt=""width="100" height="100" class="rounded-circle">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="#">
+          <img src="public/images/logo.jpg" alt=""width="100" height="100" class="rounded-circle">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="">Accueil <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/whoIam.html.twig">Qui suis-je</a>
-          </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/whoIam">Qui suis-je</a>
+            </li>
 
-          <li class="nav-item dropdown MesProjets">
-            <a class="nav-link dropdown-toggle" href="" id="MesProjets" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Mes Projets
-            </a>
-            <div class="dropdown-menu" aria-labelledby="MesProjets">
-              <a class="dropdown-item" href="#">La Wild</a>
-              <a class="dropdown-item" href="#">Mon stage</a>
-              <a class="dropdown-item" href="#">Open Class Room</a>
-              <a class="dropdown-item" href="#">Mes Projets perso</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Mes Articles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">CV</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-  
-    
-     <div class="d-flex flex-row justify-content-around mt-5">
-      <div class="img-header">
-        <img src="public/images/ordi.jpg" class="rounded-circle" alt="Responsive image">
-      </div>  
-
- 
+            <li class="nav-item dropdown MesProjets">
+              <a class="nav-link dropdown-toggle" href="" id="MesProjets" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mes Projets
+              </a>
+              <div class="dropdown-menu" aria-labelledby="MesProjets">
+                <a class="dropdown-item" href="#">La Wild</a>
+                <a class="dropdown-item" href="#">Mon stage</a>
+                <a class="dropdown-item" href="#">Open Class Room</a>
+                <a class="dropdown-item" href="#">Mes Projets perso</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Mes Articles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">CV</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      
+      <div class="d-flex flex-row justify-content-around mt-5">
+        <div class="img-header">
+          <img src="public/images/ordi.jpg" width="500" height="500" class="rounded-circle" alt="Responsive image">
+        </div>  
         <div class="d-flex flex-column">
-  
           <div><!-- photo de moi -->
             <a class="navbar-brand ml-4" href="#">
-              <img src="public/images/photomoi.jpeg" width="300" height="300" alt="Space Logo" class="rounded-circle"/>
+              <img src="public/images/photomoi.jpeg" width="200" height="200" alt="Space Logo" class="rounded-circle"/>
             </a>
           </div>
           <!-- Reseaux -->
@@ -92,26 +88,29 @@
         </div>
     
         <!-- Liste de mes projets -->
-      
-          <div class="">
-            <h1>Mes projets</h1>
-              <ul class="list-group-item">
-                <li class="list-group-item">La Wild</li>
-                <li class="list-group-item">Open Class Rooms</li>
-                <li class="list-group-item">Mes Projets perso</li>
-              </ul>
-          </div>
     
-        <!-- Parcours pro -->
-        <div></div>
-        <!-- cv  -->
-        <div></div>
-        <!-- Background image -->
+        <div class="">
+          <h1>Mes projets</h1>
+            <ul class="list-group-item">
+              <li class="list-group-item">La Wild</li>
+              <li class="list-group-item">Open Class Rooms</li>
+              <li class="list-group-item">Mes Projets perso</li>
+            </ul>
+        </div>
+       
+        
+      <!-- Parcours pro -->
+     
+      <!-- cv  -->
+      <div></div>
+      <!-- Background image -->
+    </div>
+  </header>
 
-</div>
-
-
-</header>
+  <div class="main">
+    {% block body %}
+    {% endblock %}
+  </div>
  
 </body>
 </html>

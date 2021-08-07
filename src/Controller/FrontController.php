@@ -3,7 +3,7 @@
 namespace Portfolio\Controller;
 
 use Portfolio\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Portfolio\Model\database;
 
 
 class FrontController extends AbstractController {
@@ -17,7 +17,7 @@ class FrontController extends AbstractController {
     
     public function whoIam()
     {
-        echo $this->twig->render('whoIam.html.twig');
+        echo $this->twig->render('/whoIam.html.twig');
     }
 
     public function login()
