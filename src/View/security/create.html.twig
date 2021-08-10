@@ -1,13 +1,10 @@
-{% extends "home.html.twig" %}
+<?php   
+use Portfolio\Model\UserManager;
 
-{% block stylesheets %}
-
-
-{% endblock %}
+?>
 
 
+{% block subtitle %}<h1>Creer votre compte</h1>{% endblock %}
+{% include "security/form_create.html.twig" %}
 
-{% block body %}
-login
 
-{% endblock %}

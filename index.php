@@ -18,11 +18,16 @@ $router->map('GET', '/whoIam', 'FrontController#whoIam');
 
 
 // security
-$router->map('GET|POST', '/inscription', 'SecurityController#create');
-$router->map('GET|POST', '/connexion', 'SecurityController#login');
+$router->map('GET|POST', '/login', 'FrontController#login');
+//connexion
+$router->map('GET|POST', '/auth', 'SecurityController#auth');
 
 //account
 $router->map('GET', '/mon-compte', 'AccountController#account');
+
+//project
+$router->map('GET', '/projet', 'FrontController#project');
+
 
 
 $match = $router->match();
