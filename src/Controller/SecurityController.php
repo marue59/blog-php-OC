@@ -4,42 +4,66 @@ namespace Portfolio\Controller;
 
 use Portfolio\Model\UserManager;
 use Portfolio\Controller\AbstractController;
-
-
-
-$errors = [
-    "errorUserName" => "",
-    "errorEmail" => "",
-    "errorPassword" => "",
-];
+use Entity\User;
 
 
 class SecurityController extends AbstractController {
+
+    public $errors = [
+        "errorUserName" => "",
+        "errorEmail" => "",
+        "errorPassword" => "",
+    ];
+    
 
     private $userManager;
 
     public function __construct() {
         $this->userManager = new UserManager();
+        parent::__construct();
+    }
+
+    // login
+    public function login() 
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (empty($_POST['email']) || empty($_POST['password'])) {
+    
+                $email = $_POST['email'];
+                $password = trim(htmlspecialchars($_POST['password']));
+
+                $userManager = new UserManager();
+                $user = $userManager->getByEmail($email);
+                var_dump($user);
+                if (password_verify($password, $user->getPassword())) {
+                    $_SESSION["email"] = $user->getEmail();
+                    $_SESSION["password"] = $user->getPassword;
+                    header('Location:/mon-compte');
+                } 
+            }
+        }
+            echo $this->twig->render('security/login.html.twig');
+
     }
 
     // creation de compte
-    public function create() {
-
-        $users = $this->userManager->getUsers();
-
-
-        echo $this->twig->render('security/create.html.twig', ['users' => $users]);
-    }
-
-
-    
-    // authentification
-    public function auth() {
+    public function create()
+    {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $userName = $_POST[('userName')];
-                $email = $_POST['email'];
-                $password = trim(htmlspecialchars($_POST['password']));
+                if (empty($_POST['username']) || empty($_POST['password'])) {
+                    $errors["password"] = ["Identifiant ou mot de passe incorrect"];
     
+                }
+                $userName = $_POST['username'];
+                $email = $_POST['email'];
+                  
+                $userManager = new UserManager();
+                $user = [
+                    'username' => $userName,
+                    'email' => $email,
+                    'password' => $_POST['password']
+                ];
+
                 if(empty($userName)){
                     $errors["errorUserName"]= "<small> Vous n'avez pas renseigné votre nom</small>";
                 } elseif (!preg_match("/^[a-zA-Z ]*$/", $userName)) {
@@ -50,35 +74,10 @@ class SecurityController extends AbstractController {
                 }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $errors["errorEmail"] = "<small>Entrez un mail valide</small>";
                 }
-
-                $userManager = new UserManager();
-                $user = $userManager->selectOneByUser($email);
-    
-                if (password_verify($password, $user['password'])) {
-                    $_SESSION["username"] = $user['username'];
-                    $_SESSION["userId"] = $user['id'];
-                    header('Location:/layout.html.twig' . $_SESSION['userId']);
-                } else {
-
-                    return $this->twig->render('security/auth.html.twig', ['mdp' => $mdp]);
-                }
+               
+                 $userManager->create($user);
+                
             }
-            return $this->twig->render('security/create.html.twig');
-    
+            echo $this->twig->render('security/create.html.twig');
     }
-
-
-
-    // si la session n'est pas debutée il start
-     
-   /* public function isConnected() :bool
-    {
-        if(session_status() === PHP_SESSION_NONE){
-            session_start();
-        }
-        return !empty($_SESSION['connected']);
-        
-    }*/
- 
 };
-?>
