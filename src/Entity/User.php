@@ -118,7 +118,7 @@ class User {
     /**
      * Get the value of password
      */ 
-    public function getPassword()
+    /*public function getPassword()
     {
         return $this->password;
     }
@@ -128,11 +128,12 @@ class User {
      *
      * @return  self
      */ 
-    public function setPassword($password)
+   /* public function setPassword($password)
     {
         $this->password = $password;
 
         return $this;
     }
+*/
 }
 

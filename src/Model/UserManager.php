@@ -24,7 +24,7 @@ class UserManager extends Database {
     
 
     // login
-    public function login(string $email)
+   /* public function login(string $email)
     {
         // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE email=:email");
@@ -33,7 +33,7 @@ class UserManager extends Database {
 
         return $statement->fetch();
     }
-    
+   */ 
     
     public function getByEmail(string $email)
     {
