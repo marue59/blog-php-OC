@@ -23,6 +23,8 @@ $router->map('GET', '/whoIam', 'FrontController#whoIam');
 // security
 $router->map('GET|POST', '/inscription', 'SecurityController#create');
 $router->map('GET|POST', '/connexion', 'SecurityController#login');
+$router->map('GET|POST', '/deconnexion', 'SecurityController#logout');
+
 
 //account
 $router->map('GET', '/mon-compte', 'AccountController#account');
