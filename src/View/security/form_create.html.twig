@@ -2,6 +2,15 @@
 {% block title %}  <h1>Inscription</h1> {% endblock %}
     <p>Veuillez remplir les champs pour effectuer votre inscription</p>
     <form class="" method="post">
+    {% if error.errorUserName is not empty %}
+        {{ error.errorUserName}} 
+    {% endif %}
+    {% if error.errorEmail is not empty %}
+        {{ error.errorEmail}} 
+    {% endif %}
+    {% if error.errorPassword is not empty %}
+        {{ error.errorPassword}} 
+    {% endif %}
     <div class="form-group">
             <input class="form-control" type="text" name="username" placeholder="Entrez votre nom">
         </div>
@@ -13,7 +22,7 @@
                 placeholder="Entrez votre mot de passe">
         </div>
         <div class="d-flex flex-column justify-content-center">
-            <a href="../mon-compte" class="btn btn-primary">Inscription </a>
+            <button type="submit">Inscription</button>
         </div>
     </form>
 </div>

@@ -11,7 +11,6 @@ class User {
     private $email;
     private $password;
     private $status;
-    //private $password;
     
 
 
@@ -115,25 +114,14 @@ class User {
         return $this;
     }
 
-    /**
-     * Get the value of password
-     */ 
-    /*public function getPassword()
+    public function hydrate($data)
     {
-        return $this->password;
-    }
+        $this->id = $data['id'];
+        $this->username = $data['username'];
+        $this->email = $data['email'];
+        $this->status = $data['status'];
+        $this->password = $data['password'];
 
-    /**
-     * Set the value of password
-     *
-     * @return  self
-     */ 
-   /* public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
     }
-*/
 }
 

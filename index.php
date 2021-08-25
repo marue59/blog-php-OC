@@ -3,8 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require 'vendor/autoload.php';
+//Si tu n’arrives pas à charger une classe, 
+//voici la fonction que tu peux exécuter pour tenter de la trouver”
+spl_autoload_register();
+ 
 
+require 'vendor/autoload.php';
 require 'config/config.php';
 
 

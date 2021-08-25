@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   
   
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}Marie De{% endblock %}</title>
 </head>
 
 
@@ -57,9 +57,15 @@
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#">CV</a>
                         </li> 
+                        {% if session is empty %}
                         <li class="nav-item">
                             <a href="/connexion" class="btn btn-primary">Connexion </a>
                         </li> 
+                        {% else %} 
+                        <li class="nav-item">
+                            <a href="/logout"><img class="logout-button" src="/assets/images/logout.png" alt="Déconnexion"></a>
+                        </li> 
+                        {% endif %}
                     </ul>
                 </div>
             </div>
