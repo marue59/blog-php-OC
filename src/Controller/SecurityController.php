@@ -106,6 +106,6 @@ class SecurityController extends AbstractController {
     public function logout()
     {
         session_destroy();
-        header('Location:/layout.html.twig');
+        header('Location:/');
     }
 };

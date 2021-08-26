@@ -1,0 +1,24 @@
+<div class="container ">
+{% block title %}  <h1>Créer un nouveau post</h1> {% endblock %}
+    <form class="" method="post">
+    {% if error.errorChamps is not empty %}
+        {{ error.errorChamps}} 
+    {% endif %}
+    {% if error.errorName is not empty %}
+        {{ error.errorName}} 
+    {% endif %}
+        <div class="form-group">
+            <input class="form-control" type="text" name="title" placeholder="Entrez votre titre">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="text" placeholder="Entrez votre texte">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="file" name="picture" placeholder="Telecharger votre image">
+        </div>
+
+        <div class="d-flex flex-column justify-content-center">
+            <button type="submit">Envoyer</button>
+        </div>
+    </form>
+</div>

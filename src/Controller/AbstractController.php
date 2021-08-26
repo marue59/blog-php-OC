@@ -22,8 +22,18 @@ abstract class AbstractController
                 'debug' => true,
             ]
         );
+        // utilisation de methode globale de twig 
+        $this->twig->addGlobal('session',$_SESSION);
         $this->twig->addExtension(new DebugExtension());
 
        
+    }
+//verifier si le user est conencté
+    public function isLogged()
+    {
+        if(!isset($_SESSION['email'])){
+            header('Location:/connexion');
+        } 
+
     }
 }
