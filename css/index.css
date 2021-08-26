@@ -1,4 +1,6 @@
-img-header {
-  width: 100px;
-  max-width: 150px;
+h1 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1rem;
 }
