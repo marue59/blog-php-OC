@@ -18,7 +18,6 @@ $router = new AltoRouter();
 
 // map homepage
 $router->map('GET', '/', 'FrontController#home');
-$router->map('GET', '/whoIam', 'FrontController#whoIam');
 
 // security
 $router->map('GET|POST', '/inscription', 'SecurityController#create');
