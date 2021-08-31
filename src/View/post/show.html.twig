@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block subtitle %}<h1>{{ post.title }}</h1>{% endblock %}
+
+{% block content %}
+    <div class="card-body d-flex flex-column justify-content-around">
+        <div class="card" style="width:350px">
+            <img class="card-img-top " src="{{ post.picture }}" alt="Card image">
+        </div>
+        <p class="bg-success">test{{ post.text }}</p>        
+        <p>{{ post.date }}</p>
+
+    </div>    
+{% endblock %}

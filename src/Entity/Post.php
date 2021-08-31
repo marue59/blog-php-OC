@@ -1,7 +1,7 @@
 <?php
 
 namespace Portfolio\Entity;
-use Model\UserManager;
+use Model\PostManager;
 
 class Post {
     
@@ -152,5 +152,13 @@ class Post {
         $this->dateUpdate = $dateUpdate;
 
         return $this;
+    }
+
+
+    public function hydrate($data)
+    {
+        $this->title = $data['title'];
+        $this->id = $data['id'];
+
     }
 }

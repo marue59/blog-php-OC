@@ -7,7 +7,7 @@ use Portfolio\Entity\Post;
 
 class PostManager extends Database 
 {
-    private $table = "posts";
+    private $table = "post";
     
     /**
      *  Initializes this class.
@@ -23,13 +23,73 @@ class PostManager extends Database
         
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
-            (title, text, picture, dateCreation) 
-            VALUES (:title, :text, :picture, :dateCreation)");
+            (title, text, picture, author, status, date_creation) 
+            VALUES (:title, :text, :picture,:author, :status, :date_creation)");
         $statement->bindValue('title', $post['title'], \PDO::PARAM_STR);
         $statement->bindValue('text', $post['text'], \PDO::PARAM_STR);
         $statement->bindValue('picture', $post['picture'], \PDO::PARAM_STR);
-        $statement->bindValue(' dateCreation', $post(new DateTime('now')));
+        $statement->bindValue('author', $post['author'], \PDO::PARAM_INT);
+        $statement->bindValue('status', $post['status'], \PDO::PARAM_INT);
+        $statement->bindValue('date_creation', date("Y-m-d H:i:s"));
 
         $statement->execute();
     }
+
+    public function getPostByTitle($title)
+    {
+         // prepared request
+         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE title=:title");
+         $statement->bindValue('title', $title, \PDO::PARAM_STR);
+         $statement->execute();
+ 
+         $data = $statement->fetch();
+         if ($data){
+             $post = new Post();
+             $post->hydrate($data);
+             
+             return $post;
+         }
+             return false;
+    }   
+
+
+    public function getValidatePost() 
+    {
+
+        $statement = $this->pdo->prepare('select * from post where status = 1');
+        $statement->execute();
+        $data = $statement->fetchAll();
+        if ($data){
+
+            $posts = [];
+            foreach ($data as $entity) {
+                $post = new Post();
+                $post->hydrate($entity);
+                $posts[] = $post;            
+            }
+        
+            return $posts;
+        }
+
+        return false;
+    }    
+
+    public function findOnePost($id) 
+    {
+
+         // prepared request
+         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id=:id");
+         $statement->bindValue('id', $id, \PDO::PARAM_INT);
+
+         $statement->execute();
+ 
+         $data = $statement->fetch();
+         if ($data){
+             $post = new Post();
+             $post->hydrate($data);
+             
+             return $post;
+         }
+             return false;
+    }   
 }

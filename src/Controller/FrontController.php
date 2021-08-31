@@ -2,15 +2,25 @@
 
 namespace Portfolio\Controller;
 
+use Portfolio\Model\PostManager;
 use Portfolio\Controller\AbstractController;
-use Portfolio\Model\database;
 
 
 class FrontController extends AbstractController {
 
+    private $postManager;
+
+    
+    public function __construct() {
+        $this->postManager = new PostManager();
+        parent::__construct();
+    }
  
     public function home() {
-        echo $this->twig->render('layout.html.twig');
+
+        $posts = $this->postManager->getValidatePost();
+
+        echo $this->twig->render('layout.html.twig', ['posts' => $posts]);
 
     }
     

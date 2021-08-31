@@ -40,6 +40,7 @@ class SecurityController extends AbstractController {
                 $password = trim(htmlspecialchars($_POST['password']));
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
+        
                
                 
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -47,6 +48,8 @@ class SecurityController extends AbstractController {
                 }
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION["email"] = $user->getEmail();
+                    $_SESSION["id"] = $user->getId();
+
                     header('Location:/mon-compte');
                 } 
             
