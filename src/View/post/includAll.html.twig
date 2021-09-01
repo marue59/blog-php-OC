@@ -1,13 +1,11 @@
-<div class="row">
-    <div class="m-5">
-    {% for post in posts %}    
-        <div class="card col-12 m-3" style="width: 15rem;">
+{% for post in posts %} 
+    <div class="col-lg-6 col-md-12 p-3 ">
+        <div class="card ">      
             <img src="{{ post.picture }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4 class="card-title text-center">{{ post.title }}</h4> 
-                <a href="/post/{{ post.id }}" class="btn btn-primary">go</a>
+                <a href="/post/{{ post.id }}" class="btn btn-success">go</a>
             </div>
         </div>
-    {% endfor %}
-    </div>
-</div>
+    </div> 
+{% endfor %}

@@ -62,10 +62,20 @@ class PostController extends AbstractController {
 
 
     public function post($id)
+    
     {       
         $post = $this->postManager->findOnePost($id);
-        echo $this->twig->render('post/show.html.twig',["id"=> $id]);
+
+        echo $this->twig->render('post/show.html.twig',["post" => $post]);
     }
     
+
+    public function findAll()
+
+    {
+        $posts = $this->postManager->getValidatePost();
+
+        echo $this->twig->render('project/showAllPosts.html.twig', ['posts' => $posts]);
+    }
 }
 ?>

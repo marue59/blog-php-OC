@@ -31,12 +31,11 @@ $router->map('GET', '/mon-compte', 'AccountController#account');
 
 //post
 $router->map('GET|POST', '/post/[i:id]', 'PostController#post');
-
 $router->map('GET|POST', '/post', 'PostController#create');
-
+$router->map('GET', '/les-posts', 'PostController#findAll');
 
 //project
-$router->map('GET', '/projet', 'PostController#findAll');
+$router->map('GET', '/projet', 'FrontController#project');
 
 
 
