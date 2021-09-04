@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block subtitle %}<h1>{{ post.title }}</h1>{% endblock %}       
+        
+{% block content %}
+<div class="container">
+    <div class="card text-center mt-5">
+        <img src="{{ post.picture }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.text }}</p>
+            <p class="card-text"><small class="text-muted">{{ post.date }}</small></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

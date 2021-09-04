@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
 //Si tu n’arrives pas à charger une classe, 
 //voici la fonction que tu peux exécuter pour tenter de la trouver”
 spl_autoload_register();
@@ -27,6 +28,11 @@ $router->map('GET|POST', '/deconnexion', 'SecurityController#logout');
 
 //account
 $router->map('GET', '/mon-compte', 'AccountController#account');
+
+//post
+$router->map('GET|POST', '/post/[i:id]', 'PostController#post');
+$router->map('GET|POST', '/post', 'PostController#create');
+$router->map('GET', '/les-posts', 'PostController#findAll');
 
 //project
 $router->map('GET', '/projet', 'FrontController#project');
