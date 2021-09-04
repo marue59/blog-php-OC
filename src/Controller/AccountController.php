@@ -7,8 +7,8 @@ use Portfolio\Model\AccountManager;
 use Portfolio\Controller\AbstractController;
 use Portfolio\Entity\User;
 
+// utilisation de la methode de l'abstract isLogged
 class AccountController extends AbstractController {
-    
    
     public function account() {
 

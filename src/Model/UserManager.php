@@ -35,7 +35,7 @@ class UserManager extends Database
         $statement->execute();
     }
     
-    
+    // Verification du mail pour la connexion au compte 
     public function getByEmail(string $email)
     {
         // prepared request

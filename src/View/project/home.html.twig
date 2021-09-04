@@ -7,22 +7,19 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-5 col-md-12 p-5 ">
+        <div class="col-lg-4 col-md-12">
             <div class="card">
-                <img class="card-img-top photo-moi rounded-circle" src="public/images/photomoi.jpeg" alt="Card image">
+                <img class="card-img-top photo-moi" src="public/images/photomoi.jpg" alt="Card image">
                     <div class="card-body text-center">
                         <h4 class="card-title">Marie Defretin</h4>
                         <p class="card-text">Developpeuse Web - Php</p>
                         <a href="#" class="btn btn-success">Me contacter</a>
                     </div>
             </div>
-        </div>
-        <div class="col-lg-7 col-md-12 p-5">
-            <div class="d-flex flex-column justify-content-around">
-                {% include "project/includAllProjects.html.twig" %}
-            </div> 
-        </div>
-        
-   </div>
+        </div> 
+        <div class="col-lg-8 col-md-12">
+        {% include "project/includAllProjects.html.twig" %} 
+        </div> 
+    </div>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 <div class="container ">
 {% block title %}  <h1>Créer un nouveau post</h1> {% endblock %}
-    <form class="" method="post">
+    <form class="" method="post" enctype='multipart/form-data'>
     {% if error.errorChamps is not empty %}
         {{ error.errorChamps}} 
     {% endif %}

@@ -105,7 +105,7 @@ class SecurityController extends AbstractController {
             echo $this->twig->render('security/create.html.twig',["error"=> $errors]);
     }
 
-
+    //logout
     public function logout()
     {
         session_destroy();

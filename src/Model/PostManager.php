@@ -35,6 +35,7 @@ class PostManager extends Database
         $statement->execute();
     }
 
+    // Récuperation du post via le titre
     public function getPostByTitle($title)
     {
          // prepared request
@@ -52,15 +53,15 @@ class PostManager extends Database
              return false;
     }   
 
-
+    // Récuperation des posts validé
     public function getValidatePost() 
     {
 
         $statement = $this->pdo->prepare('select * from post where status = 1');
         $statement->execute();
         $data = $statement->fetchAll();
-        if ($data){
 
+        if ($data){
             $posts = [];
             foreach ($data as $entity) {
                 $post = new Post();
@@ -74,6 +75,7 @@ class PostManager extends Database
         return false;
     }    
 
+    // Récuperation un post grace a l'id
     public function findOnePost($id) 
     {
 
@@ -84,6 +86,7 @@ class PostManager extends Database
          $statement->execute();
  
          $data = $statement->fetch();
+
          if ($data){
              $post = new Post();
              $post->hydrate($data);

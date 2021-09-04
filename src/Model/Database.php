@@ -15,7 +15,7 @@ class Database{
     }
 
   
-    //recuperer les données :
+    // Récuperation des données :
 
     public function query($statement)
     {

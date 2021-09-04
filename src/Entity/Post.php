@@ -159,6 +159,11 @@ class Post {
     {
         $this->title = $data['title'];
         $this->id = $data['id'];
+        $this->text = $data['text'];
+        $this->author = $data['author'];
+        $this->picture = $data['picture'];
+        $this->dateCreation = $data['date_creation'];
+
 
     }
 }
