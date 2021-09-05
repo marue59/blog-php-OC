@@ -25,6 +25,10 @@ $router->map('GET|POST', '/inscription', 'SecurityController#create');
 $router->map('GET|POST', '/connexion', 'SecurityController#login');
 $router->map('GET|POST', '/deconnexion', 'SecurityController#logout');
 
+//admin
+$router->map('GET', '/admin', 'SecurityController#login');
+$router->map('GET', '/admin/show', 'SecurityController#showUser');
+
 
 //account
 $router->map('GET', '/mon-compte', 'AccountController#account');

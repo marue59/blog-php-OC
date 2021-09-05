@@ -2,10 +2,11 @@
 
 namespace Portfolio\Controller;
 
-use Portfolio\Model\UserManager;
-use Portfolio\Controller\AbstractController;
 use Entity\User;
 use Model\Database;
+use Portfolio\Model\UserManager;
+use Portfolio\Controller\AbstractController;
+
 
 
 class SecurityController extends AbstractController {
@@ -42,15 +43,23 @@ class SecurityController extends AbstractController {
                 $user = $userManager->getByEmail($email);
         
                
-                
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $errors["errorEmail"] = "Votre email n'est pas valide";
                 }
+                
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION["email"] = $user->getEmail();
                     $_SESSION["id"] = $user->getId();
-
-                    header('Location:/mon-compte');
+                    $_SESSION["status"] = $user->getStatus();
+                     var_dump($_SESSION);
+                        die;
+                    
+                    if($_SESSION["status"] = $user->getStatus('1'))
+                    {
+                        echo $this->twig->render('account/admin.html.twig');
+                
+                    }
+                        header('Location:/mon-compte');
                 } 
             
             } else {
@@ -60,6 +69,18 @@ class SecurityController extends AbstractController {
             echo $this->twig->render('security/login.html.twig',['error' => $errors]);
 
     }
+
+    /*public function admin()
+    {  
+        $user= $this->login($user);
+
+        if($_SESSION["status"] = $user->getStatus('1'))
+        {
+            echo $this->twig->render('account/admin.html.twig');
+        
+        }   header('Location:/connexion');
+    }     
+*/
 
     // creation de compte
     public function create()
@@ -111,4 +132,15 @@ class SecurityController extends AbstractController {
         session_destroy();
         header('Location:/');
     }
-};
+
+    public function showUser()
+    {
+        $users = $this->userManager->findAll();
+
+        echo $this->$twig->render('account/admin.html.twig', ["users"=> $users]);
+    }
+   
+    
+
+
+}

@@ -57,7 +57,7 @@ class PostManager extends Database
     public function getValidatePost() 
     {
 
-        $statement = $this->pdo->prepare('select * from post where status = 1');
+        $statement = $this->pdo->prepare('SELECT * FROM post WHERE status = 1');
         $statement->execute();
         $data = $statement->fetchAll();
 
@@ -95,4 +95,5 @@ class PostManager extends Database
          }
              return false;
     }   
+    
 }

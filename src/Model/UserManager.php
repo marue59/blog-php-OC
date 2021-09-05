@@ -44,6 +44,7 @@ class UserManager extends Database
         $statement->execute();
 
         $data = $statement->fetch();
+        
         if ($data){
             $user = new User();
             $user->hydrate($data);
@@ -53,6 +54,26 @@ class UserManager extends Database
             return false;
     }   
 
+    // Admin : Récuperation des users non validé
+    public function findAll()
+    {
+        $statement = $this->pdo->prepare('SELECT * FROM users WHERE status = 3');
+        $statement->execute();
+        $data = $statement->fetchAll();
 
+        if ($data){
+            $users = [];
+            foreach ($data as $entity) {
+                $user = new User();
+                $user->hydrate($entity);
+                $users[] = $user;            
+            }
+        
+            return $users;
+
+        return false;
+
+    }
+}
     
 }

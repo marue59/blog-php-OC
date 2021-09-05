@@ -13,6 +13,7 @@ class AccountController extends AbstractController {
     public function account() {
 
         $this ->isLogged();
+        
         echo $this->twig->render('account/index.html.twig');
 
     }
