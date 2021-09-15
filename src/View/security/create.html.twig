@@ -1,7 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% block subtitle %}<h1>Creer votre compte</h1>{% endblock %}
+{% block content %}
+{% block subtitle %}<h1 class="text-center mt-3">Créer votre compte</h1>{% endblock %}
 
-{% block content %} 
+<div class="container">
     {% include "security/form_create.html.twig" %}
+</div>
 {% endblock %}
