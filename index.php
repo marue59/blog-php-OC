@@ -25,6 +25,13 @@ $router->map('GET|POST', '/inscription', 'SecurityController#create');
 $router->map('GET|POST', '/connexion', 'SecurityController#login');
 $router->map('GET|POST', '/deconnexion', 'SecurityController#logout');
 
+//admin
+$router->map('GET', '/admin', 'AdminController#admin');
+$router->map('GET', '/admin/show', 'AdminController#showAllUser');
+$router->map('GET', '/admin/validate/[i:id]', 'AdminController#validateStatus');
+$router->map('GET', '/admin/articles', 'AdminController#showAllArticle');
+$router->map('GET', '/admin/validate-articles/[i:id]', 'AdminController#validateArticleStatus');
+
 
 //account
 $router->map('GET', '/mon-compte', 'AccountController#account');

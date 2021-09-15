@@ -163,6 +163,7 @@ class Post {
         $this->author = $data['author'];
         $this->picture = $data['picture'];
         $this->dateCreation = $data['date_creation'];
+        $this->status = $data['status'];
 
 
     }

@@ -62,10 +62,10 @@ class PostController extends AbstractController {
     }
 
     // Afficher un post grace a l'id
-    public function post($id)
+    public function post($parameter)
     
     {       
-        $post = $this->postManager->findOnePost($id);
+        $post = $this->postManager->findOnePost($parameter['id']);
 
         echo $this->twig->render('post/show.html.twig',["post" => $post]);
     }

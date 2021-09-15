@@ -2,10 +2,11 @@
 
 namespace Portfolio\Controller;
 
-use Portfolio\Model\UserManager;
-use Portfolio\Controller\AbstractController;
 use Entity\User;
 use Model\Database;
+use Portfolio\Model\UserManager;
+use Portfolio\Controller\AbstractController;
+
 
 
 class SecurityController extends AbstractController {
@@ -42,23 +43,29 @@ class SecurityController extends AbstractController {
                 $user = $userManager->getByEmail($email);
         
                
-                
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $errors["errorEmail"] = "Votre email n'est pas valide";
                 }
+                
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION["email"] = $user->getEmail();
                     $_SESSION["id"] = $user->getId();
+                    $_SESSION["status"] = $user->getStatus();
+                  
 
-                    header('Location:/mon-compte');
+                    if($_SESSION["status"] == 1)
+                    {
+                        header('Location:/admin');
+                        exit();
+                    }
+                        header('Location:/mon-compte');
                 } 
             
             } else {
-                $errors["errorEmail"]= "Vous n'avez pas renseigné votre email";
+                $errors["errorEmail"]= "Vous n'avez pas renseigné votre email ou votre mot de passe";
             }
         }
             echo $this->twig->render('security/login.html.twig',['error' => $errors]);
-
     }
 
     // creation de compte
@@ -80,7 +87,7 @@ class SecurityController extends AbstractController {
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
                 if ($user){
-                    $errors["errorEmail"] = "Le nom existe déja";
+                    $errors["errorUserName"] = "Le nom existe déja";
 
                 } else {
 
@@ -92,7 +99,7 @@ class SecurityController extends AbstractController {
             
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-                    $errors["errorEmail"] = "<small>Entrez un mail valide</small>";
+                    $errors["errorEmail"] = "Entrez un mail valide";
 
                 } else {
 
@@ -111,4 +118,7 @@ class SecurityController extends AbstractController {
         session_destroy();
         header('Location:/');
     }
-};
+    
+
+
+}

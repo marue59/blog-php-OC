@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block subtitle %}<h1>Article {{ post.title }}</h1>{% endblock %}
+        <div class="card text-center mt-5">        
+            <img src="{{ post.picture }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.text }}</p>
+                <p class="card-text bg-success">{{ post.author }}</p>
+                <p class="card-text"><small class="text-muted">{{ post.dateCreation }}</small></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -57,7 +57,7 @@ class PostManager extends Database
     public function getValidatePost() 
     {
 
-        $statement = $this->pdo->prepare('select * from post where status = 1');
+        $statement = $this->pdo->prepare('SELECT * FROM post WHERE status = 1');
         $statement->execute();
         $data = $statement->fetchAll();
 
@@ -95,4 +95,42 @@ class PostManager extends Database
          }
              return false;
     }   
+
+
+     // Récuperation des posts en attente de validation
+     public function findAllArticle($status = null) 
+     {
+         $sql = 'SELECT * FROM post';
+
+         // si l'article existe alors concatene avec where pour filtrer
+         if($status){
+            $sql .= " WHERE status = $status";
+        }
+         $statement = $this->pdo->prepare($sql);
+
+         $statement->execute();
+
+         $data = $statement->fetchAll();
+ 
+         if ($data){
+             $posts = [];
+             foreach ($data as $entity) {
+                 $post = new Post();
+                 $post->hydrate($entity);
+                 $posts[] = $post;            
+             }
+         
+             return $posts;
+         }
+ 
+         return false;
+     }
+   // Récuperation d'un article grace a l'id et lui modifier son statut
+    public function updateStatusArticle($id) 
+    { 
+        $statement = $this->pdo->prepare("UPDATE $this->table SET status = 2 WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        
+        $statement->execute();
+    }  
 }
