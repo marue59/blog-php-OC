@@ -1,12 +1,11 @@
 {% for post in posts %} 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 p-3">
+<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mb-2">
         <div class="card">      
-            <img src="/public/images/uploads/{{ post.picture }}" class="card-img-top p-3" alt="...">
+            <img src="/public/images/uploads/{{ post.picture }}" class="card-img-top p-2" alt="...">
             <div class="card-body">
-                <h4 class="card-title text-center">{{ post.title }}</h4> 
-                <a href="/post/{{ post.id }}" class="btn btn-success">go</a>
-                <p>{{ post.text }}</p> 
-                <p>{{ post.date_creation }}</p>
+                <h3 class="card-title text-center">{{ post.title }}</h3> 
+                <p class="card-text text-center">{{ post.text }}</p>
+                <p class="card-text text-center"><a href="/post/{{ post.id }}" class="btn btn-success">Découvrir</a></p>
             </div>
         </div>
     </div> 
