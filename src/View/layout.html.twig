@@ -70,6 +70,14 @@
             {% include "project/home.html.twig" %}
         {% endblock %}
     </div>
-    
+    <footer> 
+        <div class="mt-5 bg-light text-center">
+            {% block footer %}
+                <p>&copy; Copyright 2021 </p>
+                <a href="http://mariede.fr">
+                Marie De</a>
+            {% endblock %}  
+        </div>
+    </footer>
 </body>
 </html>
