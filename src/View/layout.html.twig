@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Mon Portfolio">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/css/index.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-  
-  
-  <title>{% block title %}Marie De{% endblock %}</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Mon Portfolio">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        
+        
+        <title>{% block title %}Marie De{% endblock %}</title>
+    </head>
 
+    <!-- The scrollable area -->
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-<!-- The scrollable area -->
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- The navbar - The <a> elements are used to jump to a section in the scrollable area -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid ">
+                    <a class="navbar-brand" href="#">
+                        <img src="/public/images/logo.jpg" alt="" width="100" height="100" class="rounded-circle">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-  <!-- The navbar - The <a> elements are used to jump to a section in the scrollable area -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid ">
-                <a class="navbar-brand" href="#">
-                    <img src="/public/images/logo.jpg" alt=""width="100" height="100" class="rounded-circle">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Accueil <span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="/projet">Mes Projets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="/les-posts">Les Posts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Me contacter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">CV</a>
-                        </li> 
-                        
-                        {% if session is empty %}
-                        <li class="nav-item">
-                            <a href="/connexion" class="btn btn-primary">Connexion </a>
-                        </li>
-                        {% else %} 
-                        <li class="nav-item">
-                            <a href="/deconnexion" class="btn btn-primary">Déconnexion</a>
-                        </li> 
-                        {% endif %}
-                    </ul>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Accueil <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/projet">Mes Projets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/les-posts">Les Posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Me contacter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">CV</a>
+                            </li> 
+                            
+                            {% if session is empty %}
+                            <li class="nav-item">
+                                <a href="/connexion" class="btn btn-primary">Connexion </a>
+                            </li>
+                            {% else %} 
+                            <li class="nav-item">
+                                <a href="/deconnexion" class="btn btn-primary">Déconnexion</a>
+                            </li> 
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    {% block item %}
-    {% endblock %}
-
-    <div class="p-2">
-        {% block content %}
-            {% include "project/home.html.twig" %}
+            </nav>
+        </header>
+        {% block item %}
         {% endblock %}
-    </div>
-    <footer> 
-        <div class="mt-5 bg-light text-center">
-            {% block footer %}
-                <p>&copy; Copyright 2021 </p>
-                <a href="http://mariede.fr">
-                Marie De</a>
-            {% endblock %}  
+
+        <div class="p-2">
+            {% block content %}
+                {% include "project/home.html.twig" %}
+            {% endblock %}
         </div>
-    </footer>
-</body>
+        <footer> 
+            <div class="mt-5 bg-light text-center">
+                {% block footer %}
+                    <p>&copy; Copyright 2021 </p>
+                    <a href="http://mariede.fr">
+                    Marie De</a>
+                {% endblock %}  
+            </div>
+        </footer>
+    </body>
 </html>
