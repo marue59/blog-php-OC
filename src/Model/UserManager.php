@@ -86,7 +86,7 @@ class UserManager extends Database
     // Validation du user en modifiant le statut
     public function updateStatus($id)
     {
-        $statement = $this->pdo->prepare("UPDATE $this->table SET status = 2 WHERE id=:id");
+        $statement = $this->pdo->prepare("UPDATE $this->table SET status = 1 WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         $statement->execute();
