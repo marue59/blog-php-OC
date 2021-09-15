@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+{% block subtitle %}<h1 class="text-center mt-3">Mon parcours</h1>{% endblock %}
     <div class="container">
-        {% block subtitle %}<h1 class="p-5 text-center">Mon parcours</h1>{% endblock %}
         {% include "project/includAllProjects.html.twig" %}
     </div>
 {% endblock %}

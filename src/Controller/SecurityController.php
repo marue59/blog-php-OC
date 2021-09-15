@@ -78,8 +78,9 @@ class SecurityController extends AbstractController {
         ];
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (empty($_POST['username']) || empty($_POST['password'])) {
-                    $errors["errorPassword"] = "Identifiant ou mot de passe incorrect";
-    
+                    $errors["errorUsername"] = "Identifiant incorrect";
+                    $errors["errorPassword"] = "Mot de passe incorrect";
+
                 } else {
                 $userName = $_POST['username'];
                 $email = $_POST['email'];
