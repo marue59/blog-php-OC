@@ -51,36 +51,22 @@ class SecurityController extends AbstractController {
                     $_SESSION["email"] = $user->getEmail();
                     $_SESSION["id"] = $user->getId();
                     $_SESSION["status"] = $user->getStatus();
-                     var_dump($_SESSION);
-                        die;
-                    
-                    if($_SESSION["status"] = $user->getStatus('1'))
+                  
+
+                    if($_SESSION["status"] == 1)
                     {
-                        echo $this->twig->render('account/admin.html.twig');
-                
+                        header('Location:/admin');
+                        exit();
                     }
                         header('Location:/mon-compte');
                 } 
             
             } else {
-                $errors["errorEmail"]= "Vous n'avez pas renseigné votre email";
+                $errors["errorEmail"]= "Vous n'avez pas renseigné votre email ou votre mot de passe";
             }
         }
             echo $this->twig->render('security/login.html.twig',['error' => $errors]);
-
     }
-
-    /*public function admin()
-    {  
-        $user= $this->login($user);
-
-        if($_SESSION["status"] = $user->getStatus('1'))
-        {
-            echo $this->twig->render('account/admin.html.twig');
-        
-        }   header('Location:/connexion');
-    }     
-*/
 
     // creation de compte
     public function create()
@@ -101,7 +87,7 @@ class SecurityController extends AbstractController {
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
                 if ($user){
-                    $errors["errorEmail"] = "Le nom existe déja";
+                    $errors["errorUserName"] = "Le nom existe déja";
 
                 } else {
 
@@ -113,7 +99,7 @@ class SecurityController extends AbstractController {
             
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-                    $errors["errorEmail"] = "<small>Entrez un mail valide</small>";
+                    $errors["errorEmail"] = "Entrez un mail valide";
 
                 } else {
 
@@ -132,14 +118,6 @@ class SecurityController extends AbstractController {
         session_destroy();
         header('Location:/');
     }
-
-    public function showUser()
-    {
-        $users = $this->userManager->findAll();
-
-        echo $this->$twig->render('account/admin.html.twig', ["users"=> $users]);
-    }
-   
     
 
 

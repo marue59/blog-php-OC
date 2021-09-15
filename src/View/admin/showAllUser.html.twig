@@ -1,0 +1,29 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Profil en attente{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block subtitle %}<h1 class="text-center mt-3">Profil en attente de validation</h1>{% endblock %}
+        <div class="row">
+            {% if message is not empty%}
+                <div class="alert alert-light" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            {% for user in users %} 
+                <div class="col-lg-6 col-md-12 p-3 ">
+                    <div class="card ">      
+                        <div class="card-body">
+                            <h4 class="card-title text-center">En attente</h4>
+                                <p>Pseudo : {{ user.username }}</p>
+                                <p>E-mail : {{ user.email }}</p>
+                                <p>Le statut : {{ user.status }}</p>
+                                <a href="/admin/validate/{{ user.id }}" class="btn btn-success">Valider</a>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}   
+        </div>  
+    </div>
+{% endblock %}

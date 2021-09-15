@@ -30,7 +30,7 @@ class UserManager extends Database
         $statement->bindValue('username', $user['username'], \PDO::PARAM_STR);
         $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
         $statement->bindValue('password', $safePassword, \PDO::PARAM_STR);
-        $statement->bindValue('status', 2, \PDO::PARAM_INT);
+        $statement->bindValue('status', 3, \PDO::PARAM_INT);
 
         $statement->execute();
     }
@@ -54,11 +54,19 @@ class UserManager extends Database
             return false;
     }   
 
-    // Admin : Récuperation des users non validé
-    public function findAll()
+    // Admin : Récuperation des users en attente de validation
+    public function findAll($status = null)
     {
-        $statement = $this->pdo->prepare('SELECT * FROM users WHERE status = 3');
+        $sql = 'SELECT * FROM users';
+    
+        // si status existe alors concatene avec where
+    if($status){
+        $sql .= " WHERE status = $status";
+    } 
+        $statement = $this->pdo->prepare($sql);
+
         $statement->execute();
+
         $data = $statement->fetchAll();
 
         if ($data){
@@ -70,10 +78,39 @@ class UserManager extends Database
             }
         
             return $users;
-
+        }
         return false;
 
     }
-}
-    
+
+    // Validation du user en modifiant le statut
+    public function updateStatus($id)
+    {
+        $statement = $this->pdo->prepare("UPDATE $this->table SET status = 2 WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+        
+
+// pas utilisé pour le moment
+    // Récuperation d'un user grace a l'id
+    public function findOneUser($id) 
+    {
+            // prepared request
+            $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id=:id");
+            $statement->bindValue('id', $id, \PDO::PARAM_INT);
+
+            $statement->execute();
+
+            $data = $statement->fetch();
+            
+            if ($data){
+                $user = new User();
+                $user->hydrate($data);
+                
+                return $user;
+            }
+                return false;
+    } 
 }
