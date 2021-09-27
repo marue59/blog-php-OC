@@ -27,9 +27,10 @@ class PostController extends AbstractController {
             "errorName" => ""
         ];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-             
-            if (empty($_POST['title']) || empty($_POST['text']) || empty($_FILES['picture'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+        { 
+            if (empty($_POST['title']) || empty($_POST['text']) || empty($_FILES['picture'])) 
+            {
                 $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";
             } else {
                 
@@ -111,7 +112,6 @@ class PostController extends AbstractController {
                 throw new \RuntimeException('La taille du fichier n\est pas pris en charge');
             }
         
-            // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
             // Verification du format
             $finfo = new \finfo(FILEINFO_MIME_TYPE);
             if (false === $ext = array_search(
@@ -126,10 +126,8 @@ class PostController extends AbstractController {
                 throw new \RuntimeException('Format invalide');
             }
         
-            // You should name it uniquely.
-            // DO NOT USE $_FILES['upfile']['name'] WITHOUT ANY VALIDATION !!
+           
             // Move dans le dossier defini
-
             $pictureName = sha1_file($files['picture']['tmp_name']);
 
             if (!move_uploaded_file(
@@ -150,5 +148,52 @@ class PostController extends AbstractController {
         
         }
     }
+
+    // Modifier un post grace a l'id
+    public function edit($id)
+    {   
+        $errors = ["errorChamps" => ""];
+        $post = $this->postManager->findOnePost($id['id']);
+
+        //si l'auteur n'est pas la perso authentifié alors
+        if ($post->getAuthor() != $_SESSION['id'])
+        {
+            echo "Vous n'etes pas autorisé";
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+            {
+            if (empty($_POST['title']) || empty($_POST['text']) || empty($_FILES['picture'])) 
+            {
+                $errors["errorsChamps"] = "Un des champs n'est pas correctement rempli";
+            } else {
+                
+                $title = $_POST['title'];
+                $text = $_POST['text'];
+                $picture = $this->upload($_FILES);
+                
+                $this->postManager->edit($id, $title, $text, $picture);
+                               
+            }      
+        } 
+        echo $this->twig->render('post/edit.html.twig',["error"=> $errors, "post"=>$post]);
+    }
+        
+      // Supprimer un post grace a l'id
+    public function delete($parameter)
+    {       
+        $post = $this->postManager->findOnePost($parameter['id']);
+        
+        //si l'auteur n'est pas la perso authentifié alors
+        if ($post->getAuthor() != $_SESSION['id'] || $_SESSION['status'->$status(1)])
+        {
+            echo "Vous n'etes pas autorisé";
+            exit();
+        }
+
+        $post = $this->postManager->delete($parameter['id']);
+        
+        header('Location:/mon-compte');
+    }
 }
-?>

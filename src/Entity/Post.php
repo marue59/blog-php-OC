@@ -12,7 +12,8 @@ class Post {
     private $status;
     private $dateCreation;
     private $dateUpdate;
-
+    private $author;
+    private $username;
 
     /**
      * Get the value of id
@@ -154,6 +155,44 @@ class Post {
         return $this;
     }
 
+    /**
+     * Get the value of author
+     */ 
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set the value of author
+     *
+     * @return  self
+     */ 
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+    /**
+     * Get the value of username
+     */ 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set the value of username
+     *
+     * @return  self
+     */ 
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
 
     public function hydrate($data)
     {
@@ -164,6 +203,7 @@ class Post {
         $this->picture = $data['picture'];
         $this->dateCreation = $data['date_creation'];
         $this->status = $data['status'];
+        $this->username = $data['username'];
 
 
     }

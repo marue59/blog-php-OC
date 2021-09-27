@@ -32,10 +32,10 @@ class AdminController extends AbstractController {
         $users = $this->userManager->findAll(3);
 
         $message = null;
+
         if(isset($_SESSION['flash_message'])) {
             $message = $_SESSION['flash_message'];
             unset($_SESSION['flash_message']);
-    
         }
 
         echo $this->twig->render('admin/showAllUser.html.twig', ['users'=> $users, 'message'=> $message]);

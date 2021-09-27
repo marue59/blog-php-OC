@@ -1,7 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% block subtitle %}<h1>Creer votre post</h1>{% endblock %}
+{% block title %}  <h1>Créer un nouveau post</h1> {% endblock %}
 
 {% block content %} 
+
+{% block subtitle %}<h1 class="text-center mt-3">Créer votre post</h1>{% endblock %}
     {% include "post/form.html.twig" %}
 {% endblock %}

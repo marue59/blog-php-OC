@@ -40,6 +40,8 @@ $router->map('GET', '/mon-compte', 'AccountController#account');
 $router->map('GET|POST', '/post/[i:id]', 'PostController#post');
 $router->map('GET|POST', '/post', 'PostController#create');
 $router->map('GET', '/les-posts', 'PostController#findAll');
+$router->map('GET|POST', '/post/[i:id]/edit', 'PostController#edit');
+$router->map('GET|POST', '/post/[i:id]/delete', 'PostController#delete');
 
 //project
 $router->map('GET', '/projet', 'FrontController#project');
