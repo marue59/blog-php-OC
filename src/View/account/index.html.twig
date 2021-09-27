@@ -3,10 +3,24 @@
 {% block title %}Admin{% endblock %}
 {% block content %}
     <div class="container">
-    {% block subtitle %}<h1 class="text-center">Votre compte</h1>{% endblock %}
-    
+        {% block subtitle %}<h1 class="text-center">Votre compte</h1>{% endblock %}
+        {% for post in posts %} 
+                <div class="col-xl-4 col-md-6 col-sm-12 p-3">
+                    <div class="card mb-2 ">      
+                        <img src="/public/images/uploads/{{ post.picture }}" class="card-img-top p-3" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">{{ post.title }}</h4> 
+                            <p class="card-text text-justify">{{ post.text }}</p> 
+                            <p class="card-text text-end">{{ post.dateCreation | date("d/m/Y") }}</p>                        
+                            <p class="card-text text-end">{{ post.username }}</p>
+                            <p class="card-text text-center"><a href="/post/{{ post.id }}" class="btn btn-success mb-2">Découvrir</a></p>
+                        </div>
+                        <p class="card-text text-center"><a href="/post/{{ post.id }}/edit" class="btn btn-success mb-2">Modifier</a></p>
+                        <p class="card-text text-center"><a href="/post/{{ post.id }}/delete" class="btn btn-success mb-2">Supprimer</a></p>
 
-
-</div>
+                    </div>
+                </div> 
+        {% endfor %}   
+    </div>
 
 {% endblock %}

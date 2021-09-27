@@ -19,3 +19,9 @@ h4 {
 .card-text {
   font-size: 0.8rem;
 }
+.img-post {
+  width: 250px;
+  height: 105px;
+  margin-left: auto;
+  margin-right: auto;
+}
