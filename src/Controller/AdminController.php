@@ -2,8 +2,9 @@
 
 namespace Portfolio\Controller;
 
-use Portfolio\Model\UserManager;
 use Portfolio\Model\PostManager;
+use Portfolio\Model\UserManager;
+use Portfolio\Model\CommentManager;
 use Portfolio\Controller\AbstractController;
 
 
@@ -11,10 +12,12 @@ class AdminController extends AbstractController {
 
     private $userManager;
     private $postManager;
+    private $commentManager;
 
     public function __construct() {
         $this->userManager = new UserManager();
         $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
 
         parent::__construct();
     }
@@ -74,6 +77,31 @@ class AdminController extends AbstractController {
         $_SESSION['flash_message'] = "L'article a été validé";
         
         header('Location:/admin/articles');
+    }
+
+    //voir tout les comments en attente de validation
+    public function showAllComment()
+    {
+        $comments = $this->commentManager->findAll(2);
+
+        $message = null;
+
+        if(isset($_SESSION['flash_message'])) {
+            $message = $_SESSION['flash_message'];
+            unset($_SESSION['flash_message']);
+        }
+
+        echo $this->twig->render('admin/showAllComment.html.twig', ['comments'=> $comments, 'message'=> $message]);
+    }
+    
+    // voir le comment selectionné grace a l'id et lui changer le statut
+    public function validateStatusComment($parameter)
+    {
+        $this->commentManager->updateCommentStatus($parameter['id']);
+        
+        $_SESSION['flash_message'] = "Le commentaire a été validé";
+        
+        header('Location:/admin/comments');
     }
 }
 

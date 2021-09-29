@@ -11,6 +11,7 @@ class Comment {
     private $status;
     private $dateCreation;
     private $dateUpdate;
+    private $author;
 
 
     /**
@@ -142,7 +143,27 @@ class Comment {
         $this->dateCreation = $data['date_creation'];
         $this->dateUpdate = $data['date_update'];
         $this->author = $data['author'];
-        $this->username = $data['username'];
     }
+
+    /**
+     * Get the value of author
+     */ 
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set the value of author
+     *
+     * @return  self
+     */ 
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
 }
 ?>

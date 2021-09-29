@@ -12,6 +12,7 @@
                     <p class="card-text mt-1 text-end">{{ post.dateCreation | date("d/m/Y") }}</p>                        
                     <p class="card-text mt-1 text-end">{{ post.username }}</p>        
                     <p class="card-text text-center"><a href="/post/{{ post.id }}/create-comment" class="btn btn-success">Laisser un commentaire</a></p>
+                    <p class="card-text text-center"><a href="/post/{{ post.id }}/all-comment" class="btn btn-success">Voir tout les commentaires</a></p>
                 </div>
             </div> 
         </div>

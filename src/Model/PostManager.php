@@ -94,36 +94,35 @@ class PostManager extends Database
     }   
 
 
-     // Récuperation des posts en attente de validation
-     public function findAllArticle($status = null) 
-     {
-         $sql = 'SELECT * FROM post';
+    // Récuperation des posts en attente de validation
+    public function findAllArticle($status = null) 
+    {
+        $sql = 'SELECT * FROM post';
 
-         // si l'article existe alors concatene avec where pour filtrer
-         if($status){
-            $sql .= " WHERE status = $status";
+        // si l'article existe alors concatene avec where pour filtrer
+        if($status){
+        $sql .= " WHERE status = $status";
         }
-         $statement = $this->pdo->prepare($sql);
 
-         $statement->execute();
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        $data = $statement->fetchAll();
 
-         $data = $statement->fetchAll();
- 
-         if ($data){
-             $posts = [];
-             foreach ($data as $entity) {
-                 $post = new Post();
-                 $post->hydrate($entity);
-                 $posts[] = $post;            
-             }
-         
-             return $posts;
-         }
- 
-         return false;
-     }
+        if ($data){
+            $posts = [];
+            foreach ($data as $entity) {
+                $post = new Post();
+                $post->hydrate($entity);
+                $posts[] = $post;            
+            }
+        
+            return $posts;
+        }
 
-   // Récuperation d'un article grace a l'id et lui modifier son statut
+        return false;
+    }
+
+    // Récuperation d'un article grace a l'id et lui modifier son statut
     public function updateStatusArticle($id) 
     { 
         $statement = $this->pdo->prepare("UPDATE $this->table SET status = 1 WHERE id=:id");
@@ -169,8 +168,7 @@ class PostManager extends Database
         $statement->bindValue('picture', $picture, \PDO::PARAM_STR);
         $statement->bindValue('date_update', date("Y-m-d H:i:s"));
 
-        //var_dump($statement); die();
-         $statement->execute();
+        $statement->execute();
        
     }   
 

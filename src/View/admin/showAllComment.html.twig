@@ -1,0 +1,29 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Commentaire en attente{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block subtitle %}<h1 class="text-center mt-3">Commentaire en attente de validation</h1>{% endblock %}
+        <div class="row">
+            {% if message is not empty%}
+                <div class="alert alert-light" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            {% for comment in comments %} 
+                <div class="col-lg-6 col-md-12 p-3 ">
+                    <div class="card ">      
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Titre : {{ comment.title }}</h4>
+                                <p>text : {{ comment.text }}</p>
+                                <p>auteur : {{ comment.author }}</p>
+
+                                <a href="/admin/validate-comment/{{ comment.id }}" class="btn btn-success">Valider</a>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}   
+        </div>  
+    </div>
+{% endblock %}

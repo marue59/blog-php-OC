@@ -73,7 +73,6 @@ class PostController extends AbstractController {
     
     // Afficher tout les post grace a la methode getValidatePost
     public function findAll()
-
     {
         $posts = $this->postManager->getValidatePost();
 
