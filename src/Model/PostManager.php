@@ -9,15 +9,12 @@ class PostManager extends Database
 {
     private $table = "post";
     
-    /**
-     *  Initializes this class.
-     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    //create user
+    //create post
     public function create($post)
     {
         
