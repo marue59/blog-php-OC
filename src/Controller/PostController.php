@@ -6,16 +6,21 @@ use finfo;
 use Entity\Post;
 use Model\Database;
 use Portfolio\Model\PostManager;
+use Portfolio\Model\CommentManager;
+
 use Portfolio\Controller\AbstractController;
 
 class PostController extends AbstractController {
     
 
     private $postManager;
+    private $commentManager;
 
     
     public function __construct() {
         $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
+
         parent::__construct();
     }
 
@@ -25,6 +30,10 @@ class PostController extends AbstractController {
         $errors = [
             "errorChamps" => "",
             "errorName" => ""
+        ];
+
+        $message = [
+            "message" => ""
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
@@ -42,7 +51,7 @@ class PostController extends AbstractController {
                 $post = $this->postManager->getPostByTitle($title);
 
                 if ($post){
-                    $errors["errorName"] = "Ce post existe déja";
+                    $errors["errorName"] = "Ce titre existe déja";
 
                 } else {
 
@@ -67,8 +76,9 @@ class PostController extends AbstractController {
     
     {       
         $post = $this->postManager->findOnePost($parameter['id']);
+        $comments = $this->commentManager->findBy($parameter['id']);
 
-        echo $this->twig->render('post/show.html.twig',["post" => $post]);
+        echo $this->twig->render('post/show.html.twig',["post" => $post, "comments" => $comments]);
     }
     
     // Afficher tout les post grace a la methode getValidatePost
@@ -181,11 +191,11 @@ class PostController extends AbstractController {
         
       // Supprimer un post grace a l'id
     public function delete($parameter)
-    {       
+    {   
         $post = $this->postManager->findOnePost($parameter['id']);
-        
+            //var_dump($post);die;
         //si l'auteur n'est pas la perso authentifié alors
-        if ($post->getAuthor() != $_SESSION['id'] || $_SESSION['status'->$status(1)])
+        if ($post->getAuthor() != $_SESSION['id'] || $_SESSION['status' == '2'])
         {
             echo "Vous n'etes pas autorisé";
             exit();

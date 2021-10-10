@@ -12,6 +12,8 @@
                         <p class="card-text text-justify">{{ comment.text }}</p> 
                         <p class="card-text text-end">{{ comment.dateCreation | date("d/m/Y") }}</p>                        
                         <p class="card-text text-end">Auteur : {{ comment.author }}</p>
+                        <p class="card-text text-center"><a href="/post/{{ post.id }}/edit" class="btn btn-success">Modifier</a></p>
+                        <p class="card-text text-center"><a href="/post/{{ post.id }}/all-comment/delete" class="btn btn-success">Supprimer</a></p>
                     </div>
                 </div>
             </div> 

@@ -12,14 +12,14 @@
                     </div>
                 {% endif %}
                 {% for post in posts %} 
-                    <div class="col-lg-6 col-md-12 p-3 ">
+                    <div class="col-lg-4 col-md-12 p-3 ">
                         <div class="card">   
-                            <img src="{{ post.picture }}" class="card-img-top" alt="...">   
+                            <img src="/public/images/uploads/{{ post.picture }}" class="card-img-top p-5" alt="...">   
                             <div class="card-body">
                                 <h5 class="card-title text-center m-2">{{ post.title }}</h5>
                                 <p class="card-text text-justify">{{ post.text }}</p>
-                                <p class="card-text text-end">{{ post.dateCreation }}</p>
-                                <p class="card-text text-end">{{ post.author }}</p>
+                                <p class="card-text text-end">{{ post.dateCreation | date("d/m/Y") }}</p>
+                                <p class="card-text text-end">{{ post.username }}</p>
                                 <p class="card-text text-center"><a href="/admin/validate-articles/{{ post.id }}" class="btn btn-success">Valider l'article</a></p>
                             </div>
                         </div>

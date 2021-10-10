@@ -20,7 +20,7 @@ class CommentController extends AbstractController {
     
 
      // creation de comment
-    public function create() 
+    public function create($id) 
     {   
         $errors = [
             "errorChamps" => ""
@@ -28,33 +28,46 @@ class CommentController extends AbstractController {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
     { 
-            if (empty($_POST['title']) || empty($_POST['text'])) 
+            if ( empty($_POST['text'])) 
             {
                 $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";
             } else {
             
             $comment = [
-                
-                'title' => $_POST['title'],
+                'id' => $id['id'],
                 'text' => $_POST['text'],
-                'date_creation' => $_POST['date_creation'],
                 'author' => $_SESSION['id'],
-                'status' => 2,
             ];
             $this->commentManager->create($comment);
 
-                }
+            }
     }
-    
-    echo $this->twig->render('comment/create-form.html.twig',["error"=> $errors]);  
+    //fonction sprint formate en string 
+    // %s attente d'une variable
+       header(sprintf('Location:/post/%s', $id['id']));
     }
 
     // Afficher tout les comments grace a la methode findAll
     public function findAllComment()
     {
-        $comments = $this->commentManager->findAll();
+        $comments = $this->commentManager->findAll(1);
 
         echo $this->twig->render('comment/showAllComment.html.twig', ['comments' => $comments]);
-    
+    }
+
+    public function delete($parameter)
+    {       
+        $comment = $this->commentManager->findOneComment($parameter['id']);
+        //var_dump($comment);die;
+        //si l'auteur n'est pas la perso authentifié alors
+        if ($comment->getAuthor() != $_SESSION['id'] || $_SESSION['status'== '1'])
+        {
+            echo "Vous n'etes pas autorisé";
+            exit();
+        }
+
+        $comment = $this->commentManager->delete($parameter['id']);
+        
+        header('Location:/post/'. $id . '/all-comment');
     }
 }

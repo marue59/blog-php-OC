@@ -46,17 +46,16 @@
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#">CV</a>
                             </li> 
-                            
+                        </ul> 
                             {% if session is empty %}
-                            <li class="nav-item">
-                                <a href="/connexion" class="btn btn-primary">Connexion </a>
-                            </li>
+                            <div class="navButton">
+                                <a href="/connexion" class="btn btn-secondary">Connexion </a>
                             {% else %} 
-                            <li class="nav-item">
-                                <a href="/deconnexion" class="btn btn-primary">Déconnexion</a>
-                            </li> 
+                                <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
+                                <a href="/mon-compte" class="btn btn-dark m-2">Mon compte</a>
+                            </div> 
                             {% endif %}
-                        </ul>
+                        
                     </div>
                 </div>
             </nav>
@@ -64,7 +63,7 @@
         {% block item %}
         {% endblock %}
 
-        <div class="p-2">
+        <div class="img-bg">
             {% block content %}
                 {% include "project/home.html.twig" %}
             {% endblock %}

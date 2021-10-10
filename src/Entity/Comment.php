@@ -6,12 +6,11 @@ use Model\CommentManager;
 class Comment {
     
     private $id;
-    private $title;
     private $text;
     private $status;
     private $dateCreation;
-    private $dateUpdate;
     private $author;
+    private $userName;
 
 
     /**
@@ -34,25 +33,6 @@ class Comment {
         return $this;
     }
 
-    /**
-     * Get the value of title
-     */ 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set the value of title
-     *
-     * @return  self
-     */ 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
 
     /**
      * Get the value of text
@@ -114,35 +94,16 @@ class Comment {
         return $this;
     }
 
-    /**
-     * Get the value of dateUpdate
-     */ 
-    public function getDateUpdate()
-    {
-        return $this->dateUpdate;
-    }
-
-    /**
-     * Set the value of dateUpdate
-     *
-     * @return  self
-     */ 
-    public function setDateUpdate($dateUpdate)
-    {
-        $this->dateUpdate = $dateUpdate;
-
-        return $this;
-    }
 
     public function hydrate($data)
     {
         $this->id = $data['id'];
-        $this->title = $data['title'];
         $this->text = $data['text'];
         $this->status = $data['status'];
         $this->dateCreation = $data['date_creation'];
-        $this->dateUpdate = $data['date_update'];
-        $this->author = $data['author'];
+        $this->author = $data['author'];   
+        $this->username = $data['username'];
+
     }
 
     /**
@@ -165,5 +126,25 @@ class Comment {
         return $this;
     }
 
+
+    /**
+     * Get the value of userName
+     */ 
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    /**
+     * Set the value of userName
+     *
+     * @return  self
+     */ 
+    public function setUserName($userName)
+    {
+        $this->userName = $userName;
+
+        return $this;
+    }
 }
 ?>

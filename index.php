@@ -51,6 +51,7 @@ $router->map('GET', '/projet', 'FrontController#project');
 //comments
 $router->map('GET|POST', '/post/[i:id]/create-comment', 'CommentController#create');
 $router->map('GET|POST', '/post/[i:id]/all-comment', 'CommentController#findAllComment');
+$router->map('GET|POST', '/post/[i:id]/all-comment/delete', 'CommentController#delete');
 
 $match = $router->match();
 
