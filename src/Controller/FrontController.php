@@ -33,6 +33,12 @@ class FrontController extends AbstractController {
     {
         echo $this->twig->render('project/showAllProjects.html.twig');
     }
+
+    public function contact()
+    {
+        echo $this->twig->render('project/contact.html.twig');
+    }
+
 }
 
 ?>
