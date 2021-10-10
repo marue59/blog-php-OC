@@ -31,6 +31,8 @@ $router->map('GET', '/admin/show', 'AdminController#showAllUser');
 $router->map('GET', '/admin/validate/[i:id]', 'AdminController#validateStatus');
 $router->map('GET', '/admin/articles', 'AdminController#showAllArticle');
 $router->map('GET', '/admin/validate-articles/[i:id]', 'AdminController#validateArticleStatus');
+$router->map('GET', '/admin/comments', 'AdminController#showAllComment');
+$router->map('GET', '/admin/validate-comment/[i:id]', 'AdminController#validateStatusComment');
 
 
 //account
@@ -46,7 +48,10 @@ $router->map('GET|POST', '/post/[i:id]/delete', 'PostController#delete');
 //project
 $router->map('GET', '/projet', 'FrontController#project');
 
-
+//comments
+$router->map('GET|POST', '/post/[i:id]/create-comment', 'CommentController#create');
+$router->map('GET|POST', '/post/[i:id]/all-comment', 'CommentController#findAllComment');
+$router->map('GET|POST', '/post/[i:id]/all-comment/delete', 'CommentController#delete');
 
 $match = $router->match();
 

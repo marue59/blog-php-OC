@@ -1,3 +1,8 @@
+.img-bg {
+  background-image: url("/public/images/bg.png");
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%;
+}
 h1 {
   font-size: 1.3rem;
 }
@@ -20,8 +25,12 @@ h4 {
   font-size: 0.8rem;
 }
 .img-post {
-  width: 250px;
-  height: 105px;
+  width: auto;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
+}
+.navButton {
+  margin-left: auto;
+  margin-right: 5%;
 }
