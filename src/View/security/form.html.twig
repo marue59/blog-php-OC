@@ -1,16 +1,16 @@
 <form class="" method="post">
-{% if error.errorEmail is not empty %}
-    {{ error.errorEmail}}
-    {% endif %}
     <p class="mt-3 text-center">Pour vous connecter veuillez entrer vos informations</p>
     <div class="p-2">
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" 
-                placeholder="Email">
+        {% if error.errorEmail is not empty %}
+        <div class="alert alert-warning" role="alert">
+            {{ error.errorEmail}}
+        {% endif %} 
         </div>
         <div class="form-group">
-            <input class="form-control mt-3" type="password" name="password"
-                placeholder="Mot de passe">
+            <input class="form-control" type="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input class="form-control mt-3" type="password" name="password" placeholder="Mot de passe">
         </div>
     </div>   
     <div class="form-group"> 

@@ -8,9 +8,6 @@ class UserManager extends Database
 {
     private $table = "users";
     
-    /**
-     *  Initializes this class.
-     */
     public function __construct()
     {
         parent::__construct();

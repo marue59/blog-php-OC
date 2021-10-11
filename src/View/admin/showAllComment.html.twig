@@ -15,11 +15,10 @@
                 <div class="col-lg-6 col-md-12 p-3 ">
                     <div class="card ">      
                         <div class="card-body">
-                            <h4 class="card-title text-center">Titre : {{ comment.title }}</h4>
-                                <p>text : {{ comment.text }}</p>
-                                <p>auteur : {{ comment.author }}</p>
-
-                                <a href="/admin/validate-comment/{{ comment.id }}" class="btn btn-success">Valider</a>
+                            <p class="card-text tex">{{ comment.text }}</p>
+                            <p class="card-text text-end"> Auteur : {{ comment.author }}</p>
+                            <p class="card-text text-end">{{ comment.dateCreation | date("d/m/Y") }}</p>
+                            <a href="/admin/validate-comment/{{ comment.id }}" class="btn btn-dark">Valider</a>
                         </div>
                     </div>
                 </div> 

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.34, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
 --
 -- Host: localhost    Database: Portfolio
 -- ------------------------------------------------------
--- Server version	5.7.34-0ubuntu0.18.04.1
+-- Server version	5.7.35-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,13 +24,17 @@ DROP TABLE IF EXISTS `comment`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `status` tinyint(4) NOT NULL,
   `date_creation` datetime NOT NULL,
-  `date_update` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `post_id` int(11) NOT NULL,
+  `author` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`post_id`,`author`),
+  KEY `fk_comment_post_idx` (`post_id`),
+  KEY `fk_comment_users_idx` (`author`),
+  CONSTRAINT `fk_comment_post` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_users` FOREIGN KEY (`author`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +43,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (11,'defrfef',1,'2021-10-06 14:00:21',7,5);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,12 +58,15 @@ CREATE TABLE `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
-  `picture` varchar(45) DEFAULT NULL,
+  `picture` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL,
   `date_creation` datetime NOT NULL,
   `date_update` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 KEY_BLOCK_SIZE=1;
+  `author` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`author`),
+  KEY `fk_post_users_idx` (`author`),
+  CONSTRAINT `fk_post_users` FOREIGN KEY (`author`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 KEY_BLOCK_SIZE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +75,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (7,'post 1','defrr','9e72519190f8189e252ea6eda850c971a37f63e1.png',1,'2021-10-06 13:53:15',NULL,5),(8,'post 2 ','gtgt','0aafe9306b2b39f32b62ae6f0fbec302693ca47a.jpg',1,'2021-10-06 13:53:25',NULL,5);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +93,7 @@ CREATE TABLE `users` (
   `status` int(11) NOT NULL DEFAULT '0',
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +102,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'marie','marie@hotmail.fr',1,'123456'),(3,'sarah','sarah@caca.fr',1,'123456'),(4,'clara','clara@caca.fr',2,'123456');
+INSERT INTO `users` VALUES (5,'admin_marie','admin_marie@admin.fr',3,'$2y$10$M0Hk0UIY5wBdH0n5sEk61uz6R6uABBlynnqynS1W/Urc6jXRFeZ3m');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -106,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-07 17:34:07
+-- Dump completed on 2021-10-10 18:46:46

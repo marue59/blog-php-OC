@@ -32,11 +32,11 @@ class CommentManager extends Database
     
     public function findAll($status = null)
     {
-        $sql = 'SELECT * FROM comment';
+        $sql = 'SELECT comment.id, comment.text, comment.date_creation, comment.status, comment.author, users.username  FROM comment INNER JOIN users ON comment.author = users.id ';
 
         if($status){
 
-        $sql .= " WHERE status = $status";
+        $sql .= " WHERE comment.status = $status";
         }
 
         $statement = $this->pdo->prepare($sql);
