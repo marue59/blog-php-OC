@@ -10,7 +10,7 @@ class Comment {
     private $status;
     private $dateCreation;
     private $author;
-    private $userName;
+    private $username;
 
 
     /**
@@ -94,18 +94,6 @@ class Comment {
         return $this;
     }
 
-
-    public function hydrate($data)
-    {
-        $this->id = $data['id'];
-        $this->text = $data['text'];
-        $this->status = $data['status'];
-        $this->dateCreation = $data['date_creation'];
-        $this->author = $data['author'];   
-        $this->username = $data['username'];
-
-    }
-
     /**
      * Get the value of author
      */ 
@@ -126,25 +114,36 @@ class Comment {
         return $this;
     }
 
-
     /**
-     * Get the value of userName
+     * Get the value of username
      */ 
-    public function getUserName()
+    public function getUsername()
     {
-        return $this->userName;
+        return $this->username;
     }
 
     /**
-     * Set the value of userName
+     * Set the value of username
      *
      * @return  self
      */ 
-    public function setUserName($userName)
+    public function setUsername($username)
     {
-        $this->userName = $userName;
+        $this->username = $username;
 
         return $this;
     }
+
+    public function hydrate($data)
+    {
+        $this->id = $data['id'];
+        $this->text = $data['text'];
+        $this->status = $data['status'];
+        $this->dateCreation = $data['date_creation'];
+        $this->author = $data['author'];   
+        $this->username = $data['username'];
+
+    }
+
 }
 ?>

@@ -44,15 +44,16 @@
                                 <a class="nav-link" href="/contact">Me contacter</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="#">CV</a>
+                                <a class="nav-link" href="/public/DefretinMarieCV.pdf" download>CV </a>
                             </li> 
                         </ul> 
                             {% if session is empty %}
                             <div class="navButton">
                                 <a href="/connexion" class="btn btn-secondary">Connexion </a>
                             {% else %} 
-                                <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
+                                <a href="/admin" class="btn btn-dark m-2">Admin</a>
                                 <a href="/mon-compte" class="btn btn-dark m-2">Mon compte</a>
+                                <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
                             </div> 
                             {% endif %}
                         
@@ -64,6 +65,11 @@
         {% endblock %}
 
         <div class="img-bg">
+            {% if error.errorEmail is not empty %}
+            <div class="alert alert-warning" role="alert">
+                {{ messageSuccess }}
+            {% endif %} 
+            </div>
             {% block content %}
                 {% include "project/home.html.twig" %}
             {% endblock %}

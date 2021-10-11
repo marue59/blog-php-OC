@@ -4,24 +4,28 @@
 {% block subtitle %}<h1 class="text-center mt-3">Laisser votre message</h1>{% endblock %}
 
 <div class="container">
-<form class="" method="post">
-    <div class="p-2">
-        <div class="form-group">
-            <input class="form-control" type="text" name="username" 
-            placeholder="Entrez votre nom">
+    <form class="" method="post">
+        <div class="p-2">
+            {% if error.errorEmail is not empty %}
+            <div class="alert alert-warning" role="alert">
+                {{ error.errorEmail}}{{ error.errorUsername}}
+            {% endif %} 
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="username" 
+                placeholder="Entrez votre nom">
+            </div>
+            <div class="form-group">
+                <input class="form-control mt-3" type="email" name="email" 
+                placeholder="Entrez votre email">
+            </div>
+            <div class="form-group">
+                <input class="form-control mt-3" type="text" name="text" placeholder="Entrez votre texte">
+            </div>
         </div>
-        <div class="form-group">
-            <input class="form-control mt-3" type="email" name="email" 
-            placeholder="Entrez votre email">
+        <div class="text-center mt-2">
+            <button type="submit" class="btn btn-dark">Me contacter</button>
         </div>
-        <div class="form-group">
-            <input class="form-control mt-3" type="text" name="text" placeholder="Entrez votre texte">
-        </div>
-    </div>
-    <div class="text-center">
-        <button type="submit" class="btn btn-dark">Me contacter</button>
-    </div>
     </form>
-</div>
 </div>
 {% endblock %}

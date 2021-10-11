@@ -29,9 +29,7 @@ class SecurityController extends AbstractController {
     public function login() 
     {
         $errors = [
-            "errorUserName" => "",
-            "errorEmail" => "",
-            "errorPassword" => "",
+            "errorEmail" => ""
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -59,9 +57,13 @@ class SecurityController extends AbstractController {
                         exit();
                     }
                         header('Location:/mon-compte');
-                } 
+                }else {
+                 // PROBLEME
+                    $errors["errorEmail"]= "Vous n'avez pas renseigné votre mot de passe";
+                }
             
             } else {
+                
                 $errors["errorEmail"]= "Vous n'avez pas renseigné votre email ou votre mot de passe";
             }
         }
@@ -72,7 +74,7 @@ class SecurityController extends AbstractController {
     public function create()
     {
         $errors = [
-            "errorUserName" => "",
+            "errorUsername" => "",
             "errorEmail" => "",
             "errorPassword" => "",
         ];
@@ -88,7 +90,7 @@ class SecurityController extends AbstractController {
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
                 if ($user){
-                    $errors["errorUserName"] = "Le nom existe déja";
+                    $errors["errorUsername"] = "Le nom existe déja";
 
                 } else {
 
