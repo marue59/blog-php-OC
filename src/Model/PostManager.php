@@ -54,7 +54,7 @@ class PostManager extends Database
     public function getValidatePost() 
     {
 
-        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, post.picture, post.date_creation, post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id WHERE post.status = 1');
+        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, post.picture, post.date_creation, post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id WHERE post.status = 1 ORDER BY post.date_creation ASC');
         $statement->execute();
         $data = $statement->fetchAll();
 
