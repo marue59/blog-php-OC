@@ -75,27 +75,34 @@ class SecurityController extends AbstractController {
     {
         $errors = [
             "errorUsername" => "",
-            "errorEmail" => "",
+            "errorEmailCreate" => "",
+            "errorMail" => "",
             "errorPassword" => "",
         ];
+        $validationAdmin = [
+            "waitAdmin" => ""
+        ];
+
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (empty($_POST['username']) || empty($_POST['password'])) {
-                    $errors["errorUsername"] = "Identifiant incorrect";
-                    $errors["errorPassword"] = "Mot de passe incorrect";
+                if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
+                    $errors["errorUsername"] = "Vous devez remplir votre nom";
+                    $errors["errorEmailCreate"] = "Vous devez remplir votre adresse mail";
+                    $errors["errorPassword"] = "Vous devez remplir votre mot de passe";
+                    
 
                 } else {
-                $userName = $_POST['username'];
+                $username = $_POST['username'];
                 $email = $_POST['email'];
                   
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
                 if ($user){
-                    $errors["errorUsername"] = "Le nom existe déja";
+                    $errors["errorMail"] = "L'adresse mail existe déja";
 
                 } else {
 
                 $user = [
-                    'username' => $userName,
+                    'username' => $username,
                     'email' => $email,
                     'password' => $_POST['password']
                 ];
@@ -107,12 +114,16 @@ class SecurityController extends AbstractController {
                 } else {
 
                  $userManager->create($user);
-                 header('Location:/connexion');
+
+                 //Message compte en attente de validation
+                 $validationAdmin["waitAdmin"] = "Votre compte est en attente de validation, merci de patienter";
+
+                 header('Location:/inscription');
                 } 
             }
-            }
+            }    
         }
-            echo $this->twig->render('security/create.html.twig',["error"=> $errors]);
+            echo $this->twig->render('security/create.html.twig',["error"=> $errors, "validation"=> $validationAdmin]);
     }
 
     //logout
