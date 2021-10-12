@@ -54,7 +54,7 @@ class PostManager extends Database
     public function getValidatePost() 
     {
 
-        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, post.picture, post.date_creation, post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id WHERE post.status = 1 ORDER BY post.date_creation ASC');
+        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, post.picture, post.date_creation, post.status, post.date_update, post.author, users.username FROM post INNER JOIN users ON post.author = users.id WHERE post.status = 1 ORDER BY post.date_creation ASC');
         $statement->execute();
         $data = $statement->fetchAll();
 
@@ -75,7 +75,7 @@ class PostManager extends Database
     // Récuperation un post grace a l'id
     public function findOnePost($id) 
     {
-         $statement = $this->pdo->prepare("SELECT post.id, post.title, post.picture, post.text, post.date_creation, post.status, post.author, users.username FROM $this->table INNER JOIN users ON post.author = users.id WHERE post.id=:id");
+         $statement = $this->pdo->prepare("SELECT post.id, post.title, post.picture, post.text, post.date_creation, post.date_update, post.status, post.author, users.username FROM $this->table INNER JOIN users ON post.author = users.id WHERE post.id=:id");
          $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
          $statement->execute();

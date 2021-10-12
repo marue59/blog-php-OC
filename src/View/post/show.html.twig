@@ -9,8 +9,11 @@
                 <div class="card-body">
                     <h4 class="card-title text-center mb-3">{{ post.title }}</h4>
                     <p class="card-text text-justify">{{ post.text }}</p>
-                    <p class="card-text mt-1 text-end">{{ post.dateCreation | date("d/m/Y") }}</p>                        
+                    <p class="card-text mt-1 text-end">{{ post.dateCreation | date("d/m/Y") }}</p>
                     <p class="card-text mt-1 text-end">{{ post.username }}</p>        
+                    {% if post.dateUpdate is not empty %}
+                    <p class="card-text mt-1 text-end">modifié le : {{ post.dateUpdate | date("d/m/Y") }}</p> 
+                    {% endif %}
                 </div>
             </div> 
         </div>
@@ -20,7 +23,6 @@
             {% if error.errorChamps is not empty %}
                 {{ error.errorChamps}} 
             {% endif %}
-    
             <div class="p-2">
                 <div class="form-group">
                     <textarea class="form-control" name="text"></textarea>
@@ -46,12 +48,8 @@
                 </div>  
         {% endfor %}  
             </div> 
-       
     {% else %}
     <p class="card-text text-center">Pour laisser un commentaire vous devez vous connecter</p> 
     {% endif %}
-
-
 </div>
-
 {% endblock %}
