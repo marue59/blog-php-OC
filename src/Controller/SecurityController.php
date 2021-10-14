@@ -29,18 +29,19 @@ class SecurityController extends AbstractController {
     public function login() 
     {
         $errors = [
-            "errorEmail" => ""
+            "errorEmail" => "",
+            "errorEmpty" => "",
+            "errorMdp" => ""
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 
-                $email = $_POST['email'];
+                $email = trim(htmlspecialchars($_POST['email']));
                 $password = trim(htmlspecialchars($_POST['password']));
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
-        
-               
+                
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $errors["errorEmail"] = "Votre email n'est pas valide";
                 }
@@ -52,19 +53,19 @@ class SecurityController extends AbstractController {
                   
 
                     if($_SESSION["status"] == 1)
-                    {
+                    { 
                         header('Location:/admin');
                         exit();
                     }
                         header('Location:/mon-compte');
-                }else {
+                } else {
                  // PROBLEME
-                    $errors["errorEmail"]= "Vous n'avez pas renseigné votre mot de passe";
+                    $errors["errorMdp"]= "Vous n'avez pas renseigné votre mot de passe";
                 }
             
             } else {
                 
-                $errors["errorEmail"]= "Vous n'avez pas renseigné votre email ou votre mot de passe";
+                $errors["errorEmpty"]= "Vous devez remplir tout les champs";
             }
         }
             echo $this->twig->render('security/login.html.twig',['error' => $errors]);
@@ -79,9 +80,6 @@ class SecurityController extends AbstractController {
             "errorMail" => "",
             "errorPassword" => "",
         ];
-        $validationAdmin = [
-            "waitAdmin" => ""
-        ];
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
@@ -91,8 +89,8 @@ class SecurityController extends AbstractController {
                     
 
                 } else {
-                $username = $_POST['username'];
-                $email = $_POST['email'];
+                $username = trim(htmlspecialchars($_POST['username']));
+                $email = trim(htmlspecialchars($_POST['email']));
                   
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
@@ -102,9 +100,9 @@ class SecurityController extends AbstractController {
                 } else {
 
                 $user = [
-                    'username' => $username,
-                    'email' => $email,
-                    'password' => $_POST['password']
+                    'username' => trim(htmlspecialchars($username)),
+                    'email' => trim(htmlspecialchars($email)),
+                    'password' => trim(htmlspecialchars($_POST['password']))
                 ];
             
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -115,15 +113,12 @@ class SecurityController extends AbstractController {
 
                  $userManager->create($user);
 
-                 //Message compte en attente de validation
-                 $validationAdmin["waitAdmin"] = "Votre compte est en attente de validation, merci de patienter";
-
-                 header('Location:/inscription');
+                 header('Location:/connexion');
                 } 
             }
             }    
         }
-            echo $this->twig->render('security/create.html.twig',["error"=> $errors, "validation"=> $validationAdmin]);
+            echo $this->twig->render('security/create.html.twig',["error"=> $errors]);
     }
 
     //logout

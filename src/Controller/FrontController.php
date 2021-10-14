@@ -54,7 +54,9 @@ class FrontController extends AbstractController {
 
             } else {
 
-                $email = $_POST["email"];
+                $email = trim(htmlspecialchars($_POST["email"]));
+                //$username = trim(htmlspecialchars($_POST["username"]));
+                //$text = trim(htmlspecialchars($_POST["text"]));
 
                 // Create the Transport smtp.gmail.com
                 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
@@ -65,23 +67,23 @@ class FrontController extends AbstractController {
                 $mailer = new Swift_Mailer($transport);
 
                 // Create a message
-                $message = (new Swift_Message('Wonderful Subject'))
+                $message = (new Swift_Message('Accusé de reception'))
                 ->setFrom($email)
-                ->setTo(['marue59@hotmail.fr'])
+                ->setTo($email)
                 ->setBody('Nous accusons bonne reception de votre message, nous vous répondrons dans les plus bref delais. Marie');
 
                 // Send the message
                 $result = $mailer->send($message);
-            }
-            $successMessage = [ "messageSuccess"];
-            header('Location:/');
 
+                var_dump( $message);die();
+            }
+            
+            header('Location:/');
+            $successMessage = ["messageSuccess"];
         }
        
         echo $this->twig->render('project/contact.html.twig');
     }
-
-
 
 }
 

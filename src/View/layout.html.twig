@@ -50,13 +50,17 @@
                             {% if session is empty %}
                             <div class="navButton">
                                 <a href="/connexion" class="btn btn-secondary">Connexion </a>
-                            {% else %} 
-                                <a href="/admin" class="btn btn-dark m-2">Admin</a>
+                            {% else %}  
                                 <a href="/mon-compte" class="btn btn-dark m-2">Mon compte</a>
                                 <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
+                             {% endif %}   
+                             <!--  
+                            % if status is same as 1 %
+                                <a href="/admin" class="btn btn-dark m-2">Admin</a>
+                            % endif %
+                               --> 
                             </div> 
-                            {% endif %}
-                        
+                            
                     </div>
                 </div>
             </nav>

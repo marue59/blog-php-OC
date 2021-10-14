@@ -34,9 +34,9 @@ class CommentController extends AbstractController {
             } else {
             
             $comment = [
-                'id' => $id['id'],
-                'text' => $_POST['text'],
-                'author' => $_SESSION['id'],
+                'id' => trim(htmlspecialchars($id['id'])),
+                'text' => trim(htmlspecialchars($_POST['text'])),
+                'author' => trim(htmlspecialchars($_SESSION['id'])),
             ];
             $this->commentManager->create($comment);
 
