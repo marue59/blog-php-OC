@@ -47,18 +47,17 @@
                                 <a class="nav-link" href="/public/DefretinMarieCV.pdf" download>CV </a>
                             </li> 
                         </ul> 
-                            {% if session.id is empty %}
-                            <div class="navButton">
-                                <a href="/connexion" class="btn btn-secondary">Connexion </a>
-                            {% else %}  
-                                <a href="/mon-compte" class="btn btn-dark m-2">Mon compte</a>
-                                <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
-                            {% endif %}   
-                            {% if session.status == 1 %}
-                                <a href="/admin" class="btn btn-dark m-2">Admin</a>
-                            {% endif %}
-                            </div> 
-                            
+                        {% if session.id is empty %}
+                        <div class="navButton">
+                            <a href="/connexion" class="btn btn-secondary">Connexion </a>
+                        {% else %}  
+                            <a href="/mon-compte" class="btn btn-dark m-2">Mon compte</a>
+                            <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
+                        {% endif %}   
+                        {% if session.status == 1 %}
+                            <a href="/admin" class="btn btn-dark m-2">Admin</a>
+                        {% endif %}
+                        </div> 
                     </div>
                 </div>
             </nav>
