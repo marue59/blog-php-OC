@@ -38,17 +38,28 @@ class FrontController extends AbstractController
 
     public function contact()
     {
+        //generer un token uniqu a chaque form
+        // si le token n'est pas en session on le genere et on le met en session
+
+        if (!isset($_SESSION['token'])) {
+            $token = md5(uniqid(rand(), true));
+
+            // On le stock en session
+            $_SESSION['token'] = $token;
+        }
+
         $errors = [ "errorUsername" => "",
                     "errorEmail" => "",
+                    "errorToken" => ""
                   ];
 
-        $successMessage = [ "messageSuccess" => "Votre message a bien été envoyé"
-                          ];
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['text'])) {
                 $errors["errorUsername"] = "Vous n'avez pas remplit votre nom";
                 $errors["errorEmail"] = "Vous n'avez pas remplit votre email";
+            } elseif ($token != $_POST["token"]) {
+                $errors["errorToken"] = "Le token n'est pas valide";
             } else {
                 $email = trim(htmlspecialchars($_POST["email"]));
                 $text = trim(htmlspecialchars($_POST["text"]));
@@ -66,15 +77,13 @@ class FrontController extends AbstractController
                 ->setFrom($email)
                 ->setTo(GOOGLE_MAIL)
                 ->setBody($text);
-
+               
                 // Send the message
                 $result = $mailer->send($message);
+                unset($_SESSION['token']);
             }
-
             header('Location:/');
-            $successMessage = ["messageSuccess"];
         }
-
         echo $this->twig->render('project/contact.html.twig');
     }
 }

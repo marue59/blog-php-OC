@@ -63,11 +63,12 @@ class SecurityController extends AbstractController
                     }
                     header('Location:/mon-compte');
 
-                } elseif ($token != $_POST["token"]) {
-                    $errors["errorToken"] = "Le token n'est pas valide";
-                } else {
+                  } else {
                     $errors["errorMdp"]= "Votre compte est en attente de validation, merci de patienter...";
+                   
                 }
+            } elseif ($token != $_POST["token"]) {
+                $errors["errorToken"] = "Le token n'est pas valide";
             } else {
                 $errors["errorEmpty"]= "Vous devez remplir tout les champs";
             }  
