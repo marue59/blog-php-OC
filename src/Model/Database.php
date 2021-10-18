@@ -1,11 +1,13 @@
 <?php
+
 namespace Portfolio\Model;
-use \PDO;
+
+use PDO;
 
 require('config/db.php');
 
-class Database{
-  
+class Database
+{
     protected $pdo;
 
     public function __construct()
@@ -14,7 +16,7 @@ class Database{
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-  
+
     // Récuperation des données :
 
     public function query($statement)
@@ -23,8 +25,4 @@ class Database{
         $datas = $pdoStatement->fetchAll();
         return $datas;
     }
-
-
 }
-
-?>

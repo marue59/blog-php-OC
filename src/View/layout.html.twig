@@ -35,7 +35,7 @@
                                 <a class="nav-link" href="/">Accueil <span class="sr-only"></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/projet">Mes Projets</a>
+                                <a class="nav-link " href="/projet">Mon parcours</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="/les-posts">Les Posts</a>
@@ -47,18 +47,18 @@
                                 <a class="nav-link" href="/public/DefretinMarieCV.pdf" download>CV </a>
                             </li> 
                         </ul> 
-                            {% if session is empty %}
+                            {% if session.id is empty %}
                             <div class="navButton">
                                 <a href="/connexion" class="btn btn-secondary">Connexion </a>
                             {% else %}  
                                 <a href="/mon-compte" class="btn btn-dark m-2">Mon compte</a>
                                 <a href="/deconnexion" class="btn btn-dark m-2">Déconnexion</a>
                              {% endif %}   
-                             <!--  
-                            % if status is same as 1 %
+                             
+                            {% if session.status == 1 %}
                                 <a href="/admin" class="btn btn-dark m-2">Admin</a>
-                            % endif %
-                               --> 
+                            {% endif %}
+                            
                             </div> 
                             
                     </div>

@@ -1,10 +1,11 @@
 <?php
 
 namespace Portfolio\Entity;
+
 use Model\CommentManager;
 
-class Comment {
-    
+class Comment
+{
     private $id;
     private $text;
     private $status;
@@ -15,7 +16,7 @@ class Comment {
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -25,7 +26,7 @@ class Comment {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -36,7 +37,7 @@ class Comment {
 
     /**
      * Get the value of text
-     */ 
+     */
     public function getText()
     {
         return $this->text;
@@ -46,7 +47,7 @@ class Comment {
      * Set the value of text
      *
      * @return  self
-     */ 
+     */
     public function setText($text)
     {
         $this->text = $text;
@@ -56,7 +57,7 @@ class Comment {
 
     /**
      * Get the value of status
-     */ 
+     */
     public function getStatus()
     {
         return $this->status;
@@ -66,7 +67,7 @@ class Comment {
      * Set the value of status
      *
      * @return  self
-     */ 
+     */
     public function setStatus($status)
     {
         $this->status = $status;
@@ -76,7 +77,7 @@ class Comment {
 
     /**
      * Get the value of dateCreation
-     */ 
+     */
     public function getDateCreation()
     {
         return $this->dateCreation;
@@ -86,7 +87,7 @@ class Comment {
      * Set the value of dateCreation
      *
      * @return  self
-     */ 
+     */
     public function setDateCreation($dateCreation)
     {
         $this->dateCreation = $dateCreation;
@@ -96,7 +97,7 @@ class Comment {
 
     /**
      * Get the value of author
-     */ 
+     */
     public function getAuthor()
     {
         return $this->author;
@@ -106,7 +107,7 @@ class Comment {
      * Set the value of author
      *
      * @return  self
-     */ 
+     */
     public function setAuthor($author)
     {
         $this->author = $author;
@@ -116,7 +117,7 @@ class Comment {
 
     /**
      * Get the value of username
-     */ 
+     */
     public function getUsername()
     {
         return $this->username;
@@ -126,7 +127,7 @@ class Comment {
      * Set the value of username
      *
      * @return  self
-     */ 
+     */
     public function setUsername($username)
     {
         $this->username = $username;
@@ -140,10 +141,7 @@ class Comment {
         $this->text = $data['text'];
         $this->status = $data['status'];
         $this->dateCreation = $data['date_creation'];
-        $this->author = $data['author'];   
+        $this->author = $data['author'];
         $this->username = $data['username'];
-
     }
-
 }
-?>

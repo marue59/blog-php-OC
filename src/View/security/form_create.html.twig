@@ -20,7 +20,11 @@
             {{ error.errorMail}} 
         </div>
     {% endif %}
+    
     <div class="p-2">
+        {%if session.token is not empty%} 
+            <input class="form-control" type="hidden" name="token" value={{session.token}}>
+        {%endif%}
         <div class="form-group">
             <input class="form-control" type="text" name="username" 
             placeholder="Entrez votre nom">

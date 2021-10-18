@@ -1,9 +1,10 @@
 <?php
 
 namespace Portfolio\Model;
+
 use Portfolio\Entity\Comment;
 use Portfolio\Model\Database;
-use \PDO;
+use PDO;
 
 class CommentManager extends Database
 {
@@ -27,36 +28,34 @@ class CommentManager extends Database
         $statement->bindValue('date_creation', date("Y-m-d H:i:s"));
 
         $statement->execute();
-    } 
-    
-    
+    }
+
+
     public function findAll($status = null)
     {
         $sql = 'SELECT comment.id, comment.text, comment.date_creation, comment.status, comment.author, users.username  FROM comment INNER JOIN users ON comment.author = users.id ';
 
-        if($status){
-
-        $sql .= " WHERE comment.status = $status";
+        if ($status) {
+            $sql .= " WHERE comment.status = $status";
         }
 
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
         $data = $statement->fetchAll();
 
-        if ($data){
+        if ($data) {
             $comments = [];
             foreach ($data as $entity) {
                 $comment = new Comment();
                 $comment->hydrate($entity);
-                $comments[] = $comment;            
+                $comments[] = $comment;
             }
-        
+
             return $comments;
         }
 
         return false;
-        
-    }   
+    }
 
     // Validation du comment en modifiant le statut
     public function updateCommentStatus($id)
@@ -65,7 +64,7 @@ class CommentManager extends Database
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         $statement->execute();
-    } 
+    }
 
     // Récuperation d'un com grace a l 'id
     public function findOneComment($id)
@@ -77,17 +76,17 @@ class CommentManager extends Database
 
         $data = $statement->fetch();
 
-        if ($data){
+        if ($data) {
             $comment = new Comment();
             $comment->hydrate($data);
-            
+
             return $comment;
         }
-            return false;
-    }  
+        return false;
+    }
 
     // Effacer un com grace a l'id
-    public function delete($id) 
+    public function delete($id)
     {
         $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE comment.id = :id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
@@ -105,19 +104,17 @@ class CommentManager extends Database
         $statement->execute();
         $data = $statement->fetchAll();
 
-        if ($data){
+        if ($data) {
             $comments = [];
             foreach ($data as $entity) {
                 $comment = new Comment();
                 $comment->hydrate($entity);
-                $comments[] = $comment;            
+                $comments[] = $comment;
             }
-        
+
             return $comments;
         }
 
         return false;
-        
     }
 }
-?>

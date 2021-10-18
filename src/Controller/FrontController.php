@@ -8,24 +8,24 @@ use Swift_SmtpTransport;
 use Swift_Mailer;
 use Swift_Message;
 
-class FrontController extends AbstractController {
-
+class FrontController extends AbstractController
+{
     private $postManager;
 
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->postManager = new PostManager();
         parent::__construct();
     }
- 
-    public function home() {
 
+    public function home()
+    {
         $posts = $this->postManager->getValidatePost();
 
         echo $this->twig->render('layout.html.twig', ['posts' => $posts]);
-
     }
-    
+
     public function login()
     {
         echo $this->twig->render('security/login.html.twig');
@@ -44,47 +44,37 @@ class FrontController extends AbstractController {
 
         $successMessage = [ "messageSuccess" => "Votre message a bien été envoyé"
                           ];
-       
-        if($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
-            if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['text']))
-            {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['text'])) {
                 $errors["errorUsername"] = "Vous n'avez pas remplit votre nom";
                 $errors["errorEmail"] = "Vous n'avez pas remplit votre email";
-
             } else {
-
                 $email = trim(htmlspecialchars($_POST["email"]));
-                //$username = trim(htmlspecialchars($_POST["username"]));
-                //$text = trim(htmlspecialchars($_POST["text"]));
+                $text = trim(htmlspecialchars($_POST["text"]));
 
                 // Create the Transport smtp.gmail.com
                 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
                 ->setUsername(GOOGLE_MAIL)
                 ->setPassword(GOOGLE_PASS);
-               
+
                 // Create the Mailer using your created Transport
                 $mailer = new Swift_Mailer($transport);
 
                 // Create a message
-                $message = (new Swift_Message('Accusé de reception'))
+                $message = (new Swift_Message('Nouveau message de contact'))
                 ->setFrom($email)
-                ->setTo($email)
-                ->setBody('Nous accusons bonne reception de votre message, nous vous répondrons dans les plus bref delais. Marie');
+                ->setTo(GOOGLE_MAIL)
+                ->setBody($text);
 
                 // Send the message
                 $result = $mailer->send($message);
-
-                var_dump( $message);die();
             }
-            
+
             header('Location:/');
             $successMessage = ["messageSuccess"];
         }
-       
+
         echo $this->twig->render('project/contact.html.twig');
     }
-
 }
-
-?>

@@ -1,13 +1,14 @@
 <?php
 
 namespace Portfolio\Model;
-use \PDO;
+
+use PDO;
 use Portfolio\Entity\User;
 
-class UserManager extends Database 
+class UserManager extends Database
 {
     private $table = "users";
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +17,6 @@ class UserManager extends Database
     //create user
     public function create($user)
     {
-        
         $userPassword = trim(htmlspecialchars($user['password']));
         $safePassword = password_hash($userPassword, PASSWORD_DEFAULT);
 
@@ -31,8 +31,8 @@ class UserManager extends Database
 
         $statement->execute();
     }
-    
-    // Verification du mail pour la connexion au compte 
+
+    // Verification du mail pour la connexion au compte
     public function getByEmail(string $email)
     {
         // prepared request
@@ -41,43 +41,42 @@ class UserManager extends Database
         $statement->execute();
 
         $data = $statement->fetch();
-        
-        if ($data){
+
+        if ($data) {
             $user = new User();
             $user->hydrate($data);
-            
+
             return $user;
         }
-            return false;
-    }   
+        return false;
+    }
 
     // Admin : Récuperation des users en attente de validation
     public function findAll($status = null)
     {
         $sql = 'SELECT * FROM users';
-    
+
         // si status existe alors concatene avec where
-    if($status){
-        $sql .= " WHERE status = $status";
-    } 
+        if ($status) {
+            $sql .= " WHERE status = $status";
+        }
         $statement = $this->pdo->prepare($sql);
 
         $statement->execute();
 
         $data = $statement->fetchAll();
 
-        if ($data){
+        if ($data) {
             $users = [];
             foreach ($data as $entity) {
                 $user = new User();
                 $user->hydrate($entity);
-                $users[] = $user;            
+                $users[] = $user;
             }
-        
+
             return $users;
         }
         return false;
-
     }
 
     // Validation du user en modifiant le statut
@@ -88,24 +87,24 @@ class UserManager extends Database
 
         $statement->execute();
     }
-        
+
     // Récuperation d'un user grace a l'id
-    public function findOneUser($id) 
+    public function findOneUser($id)
     {
-            // prepared request
-            $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id=:id");
-            $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        // prepared request
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
-            $statement->execute();
+        $statement->execute();
 
-            $data = $statement->fetch();
-            
-            if ($data){
-                $user = new User();
-                $user->hydrate($data);
-                
-                return $user;
-            }
-                return false;
-    } 
+        $data = $statement->fetch();
+
+        if ($data) {
+            $user = new User();
+            $user->hydrate($data);
+
+            return $user;
+        }
+        return false;
+    }
 }
