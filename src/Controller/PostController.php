@@ -42,11 +42,7 @@ class PostController extends AbstractController
             "errorName" => "",
             "errorToken" =>""
         ];
-
-        $message = [
-            "message" => ""
-        ];
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['title']) || empty($_POST['text']) || empty($_FILES['picture'])) {
                 $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";
