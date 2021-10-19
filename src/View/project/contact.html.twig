@@ -11,6 +11,9 @@
                 {{ error.errorEmail}}{{ error.errorUsername}}
             {% endif %} 
             </div>
+            {%if session.token is not empty%} 
+                <input class="form-control" type="hidden" name="token" value={{session.token}}>
+            {%endif%}
             <div class="form-group">
                 <input class="form-control" type="text" name="username" 
                 placeholder="Entrez votre nom">
@@ -20,7 +23,7 @@
                 placeholder="Entrez votre email">
             </div>
             <div class="form-group">
-                <input class="form-control mt-3" type="text" name="text" placeholder="Entrez votre texte">
+                <textarea class="form-control mt-3" name="text" placeholder="Entrez votre texte"></textarea>
             </div>
         </div>
         <div class="text-center mt-2">

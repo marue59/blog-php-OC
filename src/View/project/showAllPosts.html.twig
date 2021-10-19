@@ -19,6 +19,9 @@
                         <p class="card-text text-end">{{ post.dateCreation | date("d/m/Y") }}</p>                        
                         <p class="card-text text-end">{{ post.username }}</p>
                         <p class="card-text text-center"><a href="/post/{{ post.id }}" class="btn btn-dark mb-2">Découvrir</a></p>
+                        {% if post.dateUpdate is not empty %}
+                            <p class="card-text mt-1 text-end">modifié le : {{ post.dateUpdate | date("d/m/Y") }}</p> 
+                        {% endif %}
                     </div>
                 </div>
             </div>

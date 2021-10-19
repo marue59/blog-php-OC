@@ -6,7 +6,10 @@
     {% if error.errorName is not empty %}
         {{ error.errorName}} 
     {% endif %}
-    <div class="p-2">
+    <div class="p-2">     
+        {%if session.token is not empty%}       
+            <input class="form-control" type="hidden" name="token" value={{session.token}}>
+        {%endif%}
         <div class="form-group">
             <input class="form-control" type="text" name="title" {% if post is defined %} value={{ post.title }} {% endif %} placeholder="Entrez votre titre">
         </div>

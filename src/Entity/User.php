@@ -1,22 +1,22 @@
 <?php
 
 namespace Portfolio\Entity;
+
 use Model\UserManager;
 
-
-class User {
-
+class User
+{
     private $id;
     private $username;
     private $email;
     private $password;
     private $status;
-    
+
 
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -26,7 +26,7 @@ class User {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -36,7 +36,7 @@ class User {
 
     /**
      * Get the value of username
-     */ 
+     */
     public function getUsername()
     {
         return $this->username;
@@ -46,7 +46,7 @@ class User {
      * Set the value of username
      *
      * @return  self
-     */ 
+     */
     public function setUsername($username)
     {
         $this->username = $username;
@@ -56,7 +56,7 @@ class User {
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -66,7 +66,7 @@ class User {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -76,7 +76,7 @@ class User {
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -86,7 +86,7 @@ class User {
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -96,7 +96,7 @@ class User {
 
     /**
      * Get the value of status
-     */ 
+     */
     public function getStatus()
     {
         return $this->status;
@@ -106,7 +106,7 @@ class User {
      * Set the value of status
      *
      * @return  self
-     */ 
+     */
     public function setStatus($status)
     {
         $this->status = $status;
@@ -121,7 +121,5 @@ class User {
         $this->email = $data['email'];
         $this->status = $data['status'];
         $this->password = $data['password'];
-
     }
 }
-

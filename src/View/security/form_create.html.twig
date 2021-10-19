@@ -1,15 +1,30 @@
 <form class="" method="post">
-    {% if error.errorUserName is not empty %}
-        {{ error.errorUserName}} 
+    <p class="mt-3 text-center">Veuillez remplir les champs pour effectuer votre inscription</p>
+    {% if error.errorUsername is not empty %}
+        <div class="alert alert-warning" role="alert">
+            {{ error.errorUsername}}
+        </div>
     {% endif %}
-    {% if error.errorEmail is not empty %}
-        {{ error.errorEmail}} 
+    {% if error.errorEmailCreate is not empty %}
+        <div class="alert alert-warning" role="alert">
+            {{ error.errorEmailCreate}} 
+        </div>
     {% endif %}
     {% if error.errorPassword is not empty %}
-        {{ error.errorPassword}} 
+        <div class="alert alert-warning" role="alert">
+            {{ error.errorPassword}} 
+        </div>
     {% endif %}
-    <p class="mt-3 text-center">Veuillez remplir les champs pour effectuer votre inscription</p>
+    {% if error.errorMail is not empty %}
+        <div class="alert alert-warning" role="alert">
+            {{ error.errorMail}} 
+        </div>
+    {% endif %}
+    
     <div class="p-2">
+        {%if session.token is not empty%} 
+            <input class="form-control" type="hidden" name="token" value={{session.token}}>
+        {%endif%}
         <div class="form-group">
             <input class="form-control" type="text" name="username" 
             placeholder="Entrez votre nom">
@@ -26,5 +41,4 @@
     <div class="text-center">
         <button type="submit" class="btn btn-dark">Inscription</button>
     </div>
-    </form>
-</div>
+</form>

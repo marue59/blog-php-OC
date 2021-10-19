@@ -1,14 +1,15 @@
 <?php
 
 namespace Portfolio\Model;
-use \PDO;
+
+use PDO;
 use Portfolio\Entity\User;
 use Portfolio\Model\Database;
 
-class AccountManager extends Database 
+class AccountManager extends Database
 {
     private $table = "users";
-    
+
     /**
      *  Initializes this class.
      */
@@ -16,7 +17,4 @@ class AccountManager extends Database
     {
         parent::__construct();
     }
-    
-
-}   
-
+}

@@ -1,5 +1,5 @@
 <?php
-    
+
 namespace Portfolio\Controller;
 
 use Entity\Comment;
@@ -7,44 +7,56 @@ use Model\Database;
 use Portfolio\Model\CommentManager;
 use Portfolio\Controller\AbstractController;
 
-
-class CommentController extends AbstractController {
-    
+class CommentController extends AbstractController
+{
     private $commentManager;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->commentManager = new CommentManager();
 
         parent::__construct();
     }
-    
 
-     // creation de comment
-    public function create($id) 
-    {   
+
+    // creation de comment
+    public function create($id)
+    {
+        //generer un token uniqu a chaque form
+        // si le token n'est pas en session on le genere et on le met en session
+
+        if (!isset($_SESSION['token'])) {
+            $token = md5(uniqid(rand(), true));
+
+            // On le stock en session
+            $_SESSION['token'] = $token;
+        }
+
         $errors = [
-            "errorChamps" => ""
+            "errorChamps" => "",
+            "errorToken" => ""
         ];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-    { 
-            if ( empty($_POST['text'])) 
-            {
-                $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";
-            } else {
-            
-            $comment = [
-                'id' => $id['id'],
-                'text' => $_POST['text'],
-                'author' => $_SESSION['id'],
-            ];
-            $this->commentManager->create($comment);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (empty($_POST['text'])) {
+                $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";     
+                   
 
+            } elseif ($token != $_POST['token']) {
+                $errors["errorToken"] = "Le token n'est pas valide";
+            } else {
+                $comment = [
+                'id' => trim(htmlspecialchars($id['id'])),
+                'text' => trim(htmlspecialchars($_POST['text'])),
+                'author' => trim(htmlspecialchars($_SESSION['id'])),
+            ];
+                $this->commentManager->create($comment);
+                unset($_SESSION['token']);
             }
-    }
-    //fonction sprint formate en string 
-    // %s attente d'une variable
-       header(sprintf('Location:/post/%s', $id['id']));
+        }
+        //fonction sprint formate en string
+        // %s attente d'une variable
+        header(sprintf('Location:/post/%s', $id['id']));
     }
 
     // Afficher tout les comments grace a la methode findAll
@@ -56,18 +68,17 @@ class CommentController extends AbstractController {
     }
 
     public function delete($parameter)
-    {       
+    {
         $comment = $this->commentManager->findOneComment($parameter['id']);
-        //var_dump($comment);die;
+
         //si l'auteur n'est pas la perso authentifié alors
-        if ($comment->getAuthor() != $_SESSION['id'] || $_SESSION['status'== '1'])
-        {
+        if ($comment->getAuthor() != $_SESSION['id'] || $_SESSION["status"] != 1) {
             echo "Vous n'etes pas autorisé";
             exit();
         }
 
         $comment = $this->commentManager->delete($parameter['id']);
-        
+
         header('Location:/post/'. $id . '/all-comment');
     }
 }

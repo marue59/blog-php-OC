@@ -1,10 +1,11 @@
 <?php
 
 namespace Portfolio\Entity;
+
 use Model\PostManager;
 
-class Post {
-    
+class Post
+{
     private $id;
     private $title;
     private $text;
@@ -17,7 +18,7 @@ class Post {
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -27,7 +28,7 @@ class Post {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -37,7 +38,7 @@ class Post {
 
     /**
      * Get the value of title
-     */ 
+     */
     public function getTitle()
     {
         return $this->title;
@@ -47,7 +48,7 @@ class Post {
      * Set the value of title
      *
      * @return  self
-     */ 
+     */
     public function setTitle($title)
     {
         $this->title = $title;
@@ -57,7 +58,7 @@ class Post {
 
     /**
      * Get the value of text
-     */ 
+     */
     public function getText()
     {
         return $this->text;
@@ -67,7 +68,7 @@ class Post {
      * Set the value of text
      *
      * @return  self
-     */ 
+     */
     public function setText($text)
     {
         $this->text = $text;
@@ -77,7 +78,7 @@ class Post {
 
     /**
      * Get the value of picture
-     */ 
+     */
     public function getPicture()
     {
         return $this->picture;
@@ -87,7 +88,7 @@ class Post {
      * Set the value of picture
      *
      * @return  self
-     */ 
+     */
     public function setPicture($picture)
     {
         $this->picture = $picture;
@@ -97,7 +98,7 @@ class Post {
 
     /**
      * Get the value of status
-     */ 
+     */
     public function getStatus()
     {
         return $this->status;
@@ -107,7 +108,7 @@ class Post {
      * Set the value of status
      *
      * @return  self
-     */ 
+     */
     public function setStatus($status)
     {
         $this->status = $status;
@@ -117,7 +118,7 @@ class Post {
 
     /**
      * Get the value of dateCreation
-     */ 
+     */
     public function getDateCreation()
     {
         return $this->dateCreation;
@@ -127,7 +128,7 @@ class Post {
      * Set the value of dateCreation
      *
      * @return  self
-     */ 
+     */
     public function setDateCreation($dateCreation)
     {
         $this->dateCreation = $dateCreation;
@@ -137,7 +138,7 @@ class Post {
 
     /**
      * Get the value of dateUpdate
-     */ 
+     */
     public function getDateUpdate()
     {
         return $this->dateUpdate;
@@ -147,7 +148,7 @@ class Post {
      * Set the value of dateUpdate
      *
      * @return  self
-     */ 
+     */
     public function setDateUpdate($dateUpdate)
     {
         $this->dateUpdate = $dateUpdate;
@@ -157,7 +158,7 @@ class Post {
 
     /**
      * Get the value of author
-     */ 
+     */
     public function getAuthor()
     {
         return $this->author;
@@ -167,7 +168,7 @@ class Post {
      * Set the value of author
      *
      * @return  self
-     */ 
+     */
     public function setAuthor($author)
     {
         $this->author = $author;
@@ -176,7 +177,7 @@ class Post {
     }
     /**
      * Get the value of username
-     */ 
+     */
     public function getUsername()
     {
         return $this->username;
@@ -186,7 +187,7 @@ class Post {
      * Set the value of username
      *
      * @return  self
-     */ 
+     */
     public function setUsername($username)
     {
         $this->username = $username;
@@ -202,9 +203,8 @@ class Post {
         $this->author = $data['author'];
         $this->picture = $data['picture'];
         $this->dateCreation = $data['date_creation'];
+        $this->dateUpdate = $data['date_update'];
         $this->status = $data['status'];
         $this->username = $data['username'];
-
-
     }
 }
