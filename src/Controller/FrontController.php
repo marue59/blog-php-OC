@@ -26,6 +26,11 @@ class FrontController extends AbstractController
         echo $this->twig->render('layout.html.twig', ['posts' => $posts]);
     }
 
+    /**
+     * connexion
+     *
+     * @return void
+     */
     public function login()
     {
         echo $this->twig->render('security/login.html.twig');
@@ -60,17 +65,17 @@ class FrontController extends AbstractController
 
                 // Create the Transport smtp.gmail.com
                 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
-                ->setUsername(GOOGLE_MAIL)
-                ->setPassword(GOOGLE_PASS);
+                    ->setUsername(GOOGLE_MAIL)
+                    ->setPassword(GOOGLE_PASS);
 
                 // Create the Mailer using your created Transport
                 $mailer = new Swift_Mailer($transport);
 
                 // Create a message
                 $message = (new Swift_Message('Nouveau message de contact'))
-                ->setFrom($email)
-                ->setTo(GOOGLE_MAIL)
-                ->setBody($username, $email, $text);
+                    ->setFrom($email)
+                    ->setTo(GOOGLE_MAIL)
+                    ->setBody($username, $email, $text);
                
                 // Send the message
                 $result = $mailer->send($message);

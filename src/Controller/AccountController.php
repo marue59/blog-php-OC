@@ -8,8 +8,11 @@ use Portfolio\Model\PostManager;
 use Portfolio\Model\AccountManager;
 use Portfolio\Controller\AbstractController;
 
-// utilisation de la methode de l'abstract isLogged
-
+/**
+ *  utilisation de la methode de l'abstract isLogged
+ *
+ * @return void
+ */
 class AccountController extends AbstractController
 {
     private $postManager;

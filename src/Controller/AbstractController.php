@@ -24,7 +24,12 @@ abstract class AbstractController
         $this->twig->addGlobal('session', $_SESSION);
         $this->twig->addExtension(new DebugExtension());
     }
-    //verifier si le user est conencté
+    
+    /**
+     *  verifier si le user est connecté
+     *
+     * @return void
+     */
     public function isLogged()
     {
         if (!isset($_SESSION['email'])) {
@@ -32,6 +37,11 @@ abstract class AbstractController
         }
     }
 
+    /**
+     *  génération du token
+     *
+     * @return void
+     */
     public function generateToken()
     { 
         if (!isset($_SESSION['token'])) {

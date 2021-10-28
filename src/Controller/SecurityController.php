@@ -52,7 +52,9 @@ class SecurityController extends AbstractController
                 $user = $userManager->getByEmail($email);
 
                 //si le status est 1 ou 2 et u'il est validé et que l'email est valide que le pass est bon on autorise
-                if ($user && in_array($user ->getStatus(), [1, 2]) && filter_var($email, FILTER_VALIDATE_EMAIL) && password_verify($password, $user->getPassword())) {
+                if ($user && in_array($user ->getStatus(), [1, 2])
+                     && filter_var($email, FILTER_VALIDATE_EMAIL) 
+                     && password_verify($password, $user->getPassword())) {
                     $_SESSION["email"] = $user->getEmail();
                     $_SESSION["id"] = $user->getId();
                     $_SESSION["status"] = $user->getStatus();

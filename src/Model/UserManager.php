@@ -14,7 +14,12 @@ class UserManager extends Database
         parent::__construct();
     }
 
-    //create user
+    
+    /**
+     * create user
+     *
+     * @return void
+     */
     public function create($user)
     {
         $userPassword = trim(htmlspecialchars($user['password']));
@@ -32,7 +37,11 @@ class UserManager extends Database
         $statement->execute();
     }
 
-    // Verification du mail pour la connexion au compte
+     /**
+     * Verification du mail pour la connexion au compte
+     *
+     * @return void
+     */
     public function getByEmail(string $email)
     {
         // prepared request
@@ -51,7 +60,11 @@ class UserManager extends Database
         return false;
     }
 
-    // Admin : Récuperation des users en attente de validation
+    /**
+     * Admin : Récuperation des users en attente de validation
+     *
+     * @return void
+     */
     public function findAll($status = null)
     {
         $sql = 'SELECT * FROM users';
@@ -79,7 +92,11 @@ class UserManager extends Database
         return false;
     }
 
-    // Validation du user en modifiant le statut
+    /**
+     * Validation du user en modifiant le statut
+     *
+     * @return void
+     */
     public function updateStatus($id)
     {
         $statement = $this->pdo->prepare("UPDATE $this->table SET status = 2 WHERE id=:id");
@@ -88,7 +105,12 @@ class UserManager extends Database
         $statement->execute();
     }
 
-    // Récuperation d'un user grace a l'id
+
+    /**
+     * Récuperation d'un user grace a l'id
+     *
+     * @return void
+     */
     public function findOneUser($id)
     {
         // prepared request

@@ -27,7 +27,11 @@ class AdminController extends AbstractController
         echo $this->twig->render('admin/index.html.twig');
     }
 
-    //voir tout les user en attente de validation
+    /**
+     * voir tout les user en attente de validation
+     *
+     * @return void
+     */
     public function showAllUser()
     {
         $users = $this->userManager->findAll(3);
@@ -39,10 +43,15 @@ class AdminController extends AbstractController
             unset($_SESSION['flash_message']);
         }
 
-        echo $this->twig->render('admin/showAllUser.html.twig', ['users'=> $users, 'message'=> $message]);
+        echo $this->twig->render('admin/showAllUser.html.twig', 
+                                ['users'=> $users, 'message'=> $message]);
     }
 
-    // voir le user selectionné grace a l'id et lui changer le statut
+    /**
+     * voir le user selectionné grace a l'id et lui changer le statut
+     *
+     * @return void
+     */
     public function validateStatus($parameter)
     {
         $this->userManager->updateStatus($parameter['id']);
@@ -52,7 +61,12 @@ class AdminController extends AbstractController
         header('Location:/admin/show');
     }
 
-    // voir tout les articles en attente de validation
+    
+    /**
+     * voir tout les articles en attente de validation
+     *
+     * @return void
+     */
     public function showAllArticle()
     {
         $posts = $this->postManager->findAllArticle(2);
@@ -63,10 +77,16 @@ class AdminController extends AbstractController
             $messageArticle = $_SESSION['flash_message'];
             unset($_SESSION['flash_message']);
         }
-        echo $this->twig->render('admin/showAllArticle.html.twig', ['posts'=> $posts, 'message'=> $messageArticle]);
+        echo $this->twig->render('admin/showAllArticle.html.twig', 
+                                ['posts'=> $posts, 'message'=> $messageArticle]);
     }
 
-    // voir l'article selectionné grace a l'id et lui changer le statut
+
+    /**
+     * voir l'article selectionné grace a l'id et lui changer le statut      
+     *
+     * @return void
+     */
     public function validateArticleStatus($parameter)
     {
         $this->postManager->updateStatusArticle($parameter['id']);
@@ -76,7 +96,12 @@ class AdminController extends AbstractController
         header('Location:/admin/articles');
     }
 
-    //voir tout les comments en attente de validation
+
+    /**
+     * voir tout les comments en attente de validation 
+     *
+     * @return void
+     */
     public function showAllComment()
     {
         $comments = $this->commentManager->findAll(2);
@@ -88,10 +113,15 @@ class AdminController extends AbstractController
             unset($_SESSION['flash_message']);
         }
 
-        echo $this->twig->render('admin/showAllComment.html.twig', ['comments'=> $comments, 'message'=> $message]);
+        echo $this->twig->render('admin/showAllComment.html.twig', 
+                                ['comments'=> $comments, 'message'=> $message]);
     }
 
-    // voir le comment selectionné grace a l'id et lui changer le statut
+    // 
+    /**
+     * voir le comment selectionné grace a l'id et lui changer le statut
+     * @return void
+     */
     public function validateStatusComment($parameter)
     {
         $this->commentManager->updateCommentStatus($parameter['id']);

@@ -18,7 +18,6 @@ class Database
 
 
     // Récuperation des données :
-
     public function query($statement)
     {
         $pdoStatement = $this->pdo->query($statement);
