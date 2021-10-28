@@ -22,16 +22,9 @@ class CommentController extends AbstractController
     // creation de comment
     public function create($id)
     {
-        //generer un token uniqu a chaque form
-        // si le token n'est pas en session on le genere et on le met en session
-
-        if (!isset($_SESSION['token'])) {
-            $token = md5(uniqid(rand(), true));
-
-            // On le stock en session
-            $_SESSION['token'] = $token;
-        }
-
+        //methode dans abstract
+        $this->generateToken();
+        
         $errors = [
             "errorChamps" => "",
             "errorToken" => ""
@@ -39,9 +32,7 @@ class CommentController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['text'])) {
-                $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";     
-                   
-
+                $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";   
             } elseif ($token != $_POST['token']) {
                 $errors["errorToken"] = "Le token n'est pas valide";
             } else {

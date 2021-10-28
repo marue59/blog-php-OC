@@ -95,14 +95,17 @@ class PostManager extends Database
     // Récuperation des posts en attente de validation
     public function findAllArticle($status = null)
     {
-        $sql = 'SELECT post.id, post.title, post.picture, post.text, post.date_creation,  post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id';
+        $sql = 'SELECT post.id, post.title, post.picture, post.text, post.date_creation, post.date_update, post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id';
 
         // si l'article existe alors concatene avec where pour filtrer
         if ($status) {
-            $sql .= " WHERE post.status = $status";
+            $sql .= " WHERE post.status = :status";
         }
-
         $statement = $this->pdo->prepare($sql);
+
+        if ($status) {
+            $statement->bindValue('status', $status, \PDO::PARAM_INT);
+        }
         $statement->execute();
         $data = $statement->fetchAll();
 

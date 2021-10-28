@@ -27,15 +27,8 @@ class PostController extends AbstractController
     // creation de post
     public function create()
     {
-        //generer un token uniqu a chaque form
-        // si le token n'est pas en session on le genere et on le met en session
-
-        if (!isset($_SESSION['token'])) {
-            $token = md5(uniqid(rand(), true));
-
-            // On le stock en session
-            $_SESSION['token'] = $token;
-        }
+        //methode dans abstract
+       $this->generateToken();
 
         $errors = [
             "errorChamps" => "",
@@ -46,29 +39,29 @@ class PostController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['title']) || empty($_POST['text']) || empty($_FILES['picture'])) {
                 $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";
+            } elseif (isset($_POST["token"]) && $_SESSION['token'] != $_POST["token"]) {
+                $errors["errorToken"] = "Le token n'est pas valide";
             } else {
                 $title = trim(htmlspecialchars($_POST['title']));
                 $text = trim(htmlspecialchars($_POST['text']));
-                $picture = $this->upload($_FILES);
 
                 // Utilisation de la methode postByTitle pour verifier que mon titre n'existe pas deja.
                 $post = $this->postManager->getPostByTitle($title);
 
                 if ($post) {
                     $errors["errorName"] = "Ce titre existe déja";
-                } elseif ($token != $_POST["token"]) {
-                    $errors["errorToken"] = "Le token n'est pas valide";
                 } else {
                     $post = [
                             'title' => trim(htmlspecialchars($title)),
                             'text' => trim(htmlspecialchars($text)),
-                            'picture' => $picture,
+                            'picture' => $this->upload($_FILES),
                             'author' => trim(htmlspecialchars($_SESSION['id'])),
                             'status' => 2,
                         ];
 
                     $this->postManager->create($post);
                     unset($_SESSION['token']);
+                    header('Location:/');
 
                 }
             }
@@ -80,7 +73,7 @@ class PostController extends AbstractController
     public function post($parameter)
     {
         $post = $this->postManager->findOnePost($parameter['id']);
-        $comments = $this->commentManager->findBy($parameter['id']);
+        $comments = $this->commentManager->findBy($parameter['id'], 1);
 
         echo $this->twig->render('post/show.html.twig', ["post" => $post, "comments" => $comments]);
     }

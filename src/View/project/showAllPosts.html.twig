@@ -3,7 +3,7 @@
 {% block content %} 
 {% block subtitle %}<h1 class="text-center mt-3">Tous les posts</h1>{% endblock %} 
 <div class="container">
-    {% if session is not empty %}
+    {% if session.id is not empty %}
         <a href="/post" class="btn btn-secondary">Créer un post</a>
         {% else %} 
         <a href="/connexion" class="btn btn-secondary">Créer un post</a>

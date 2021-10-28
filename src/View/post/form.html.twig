@@ -14,7 +14,7 @@
             <input class="form-control" type="text" name="title" {% if post is defined %} value={{ post.title }} {% endif %} placeholder="Entrez votre titre">
         </div>
         <div class="form-group">
-            <input class="form-control mt-3" type="text" name="text" {% if post is defined %} value={{ post.text }} {% endif %} placeholder="Entrez votre texte">
+            <textarea class="form-control mt-3" name="text" placeholder="Entrez votre texte">{% if post is defined %} {{ post.text }} {% endif %}</textarea>
         </div>
         <div class="form-group">
             <input class="form-control mt-3" type="file" name="picture" placeholder="Telecharger votre image">

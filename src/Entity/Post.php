@@ -205,6 +205,10 @@ class Post
         $this->dateCreation = $data['date_creation'];
         $this->dateUpdate = $data['date_update'];
         $this->status = $data['status'];
-        $this->username = $data['username'];
+
+        // si le set de username n'est pas defini je le defini
+        if(isset($data["username"])){
+            $this->username = $data['username'];
+        }
     }
 }

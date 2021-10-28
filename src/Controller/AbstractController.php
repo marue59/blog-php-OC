@@ -31,4 +31,14 @@ abstract class AbstractController
             header('Location:/connexion');
         }
     }
+
+    public function generateToken()
+    { 
+        if (!isset($_SESSION['token'])) {
+        $token = md5(uniqid(rand(), true));
+
+        // On le stock en session
+        $_SESSION['token'] = $token;
+        }
+    }
 }
