@@ -38,16 +38,9 @@ class FrontController extends AbstractController
 
     public function contact()
     {
-        //generer un token uniqu a chaque form
-        // si le token n'est pas en session on le genere et on le met en session
-
-        if (!isset($_SESSION['token'])) {
-            $token = md5(uniqid(rand(), true));
-
-            // On le stock en session
-            $_SESSION['token'] = $token;
-        }
-
+         //methode dans abstract
+       $this->generateToken();
+       
         $errors = [ "errorUsername" => "",
                     "errorEmail" => "",
                     "errorToken" => ""
@@ -61,6 +54,7 @@ class FrontController extends AbstractController
             } elseif ($token != $_POST["token"]) {
                 $errors["errorToken"] = "Le token n'est pas valide";
             } else {
+                $username = trim(htmlspecialchars($_POST["username"]));
                 $email = trim(htmlspecialchars($_POST["email"]));
                 $text = trim(htmlspecialchars($_POST["text"]));
 
@@ -76,7 +70,7 @@ class FrontController extends AbstractController
                 $message = (new Swift_Message('Nouveau message de contact'))
                 ->setFrom($email)
                 ->setTo(GOOGLE_MAIL)
-                ->setBody($text);
+                ->setBody($username, $email, $text);
                
                 // Send the message
                 $result = $mailer->send($message);

@@ -95,11 +95,19 @@ class CommentManager extends Database
     }
 
     // findBy recupere le post id
-    public function findBy($post_id)
+    public function findBy($post_id, $status = null)
     {
         $sql = "SELECT comment.id, comment.text, comment.date_creation, comment.status, comment.author, users.username FROM $this->table INNER JOIN users ON comment.author = users.id WHERE post_id = :post_id";
+        if ($status) {
+            $sql .= " AND comment.status = :status";
+        }
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue('post_id', $post_id, \PDO::PARAM_INT);
+
+        if ($status) {
+            $statement->bindValue('status', $status, \PDO::PARAM_INT);
+        }
+
 
         $statement->execute();
         $data = $statement->fetchAll();

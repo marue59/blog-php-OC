@@ -5,7 +5,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-lg-6 col-md-6 p-3">
             <div class="card mb-2">
-                <img src="/public/images/uploads/{{ post.picture }}" class="card-img-top img-post p-4" alt="...">
+                <img src="/public/images/uploads/{{ post.picture }}" class="card-img-top img-post p-3" alt="...">
                 <div class="card-body">
                     <h4 class="card-title text-center mb-3">{{ post.title }}</h4>
                     <p class="card-text text-justify">{{ post.text }}</p>
@@ -35,24 +35,24 @@
                 <button type="submit" class="btn btn-success">Envoyer</button>
             </div>
         </form>
-        {% for comment in comments %} 
-            <div class="row">
-                <div class="col-sm-12 p-3">     
-                    <div class="card mb-2 ">      
-                        <div class="card-body">
-                            <p class="card-text text-justify">{{ comment.text }}</p> 
-                            <p class="card-text text-end">{{ comment.dateCreation | date("d/m/Y") }}</p>                        
-                            <p class="card-text text-end">Auteur : {{ comment.username }}</p>
-                            {% if session.id == comment.author %}
-                                <p class="card-text text-center"><a href="/post/{{ post.id }}/all-comment/delete" class="btn btn-dark">Supprimer</a></p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>  
-        {% endfor %}  
-            </div> 
     {% else %}
-    <p class="card-text text-center">Pour laisser un commentaire vous devez vous connecter</p> 
+        <p class="card-text text-center">Pour laisser un commentaire vous devez vous connecter</p> 
     {% endif %}
+    {% for comment in comments %} 
+        <div class="row">
+            <div class="col-sm-12 p-3">     
+                <div class="card mb-2 ">      
+                    <div class="card-body">
+                        <p class="card-text text-justify">{{ comment.text }}</p> 
+                        <p class="card-text text-end">{{ comment.dateCreation | date("d/m/Y") }}</p>                        
+                        <p class="card-text text-end">Auteur : {{ comment.username }}</p>
+                        {% if session.id == comment.author %}
+                            <p class="card-text text-center"><a href="/post/{{ post.id }}/all-comment/delete" class="btn btn-dark">Supprimer</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>  
+        </div> 
+    {% endfor %}
 </div>
 {% endblock %}
