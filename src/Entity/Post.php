@@ -195,6 +195,11 @@ class Post
         return $this;
     }
 
+    /**
+     * Hydratation 
+     *
+     * @return void
+     */
     public function hydrate($data)
     {
         $this->title = $data['title'];

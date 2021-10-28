@@ -28,7 +28,7 @@ class PostController extends AbstractController
     public function create()
     {
         //methode dans abstract
-       $this->generateToken();
+        $this->generateToken();
 
         $errors = [
             "errorChamps" => "",
@@ -38,7 +38,7 @@ class PostController extends AbstractController
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['title']) || empty($_POST['text']) || empty($_FILES['picture'])) {
-                $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";
+                $errors["errorsChamps"] = "Un des champs n'est pas correctement rempli";
             } elseif (isset($_POST["token"]) && $_SESSION['token'] != $_POST["token"]) {
                 $errors["errorToken"] = "Le token n'est pas valide";
             } else {
@@ -75,7 +75,8 @@ class PostController extends AbstractController
         $post = $this->postManager->findOnePost($parameter['id']);
         $comments = $this->commentManager->findBy($parameter['id'], 1);
 
-        echo $this->twig->render('post/show.html.twig', ["post" => $post, "comments" => $comments]);
+        echo $this->twig->render('post/show.html.twig', 
+                                ["post" => $post, "comments" => $comments]);
     }
 
     // Afficher tout les post grace a la methode getValidatePost
@@ -83,7 +84,8 @@ class PostController extends AbstractController
     {
         $posts = $this->postManager->getValidatePost();
 
-        echo $this->twig->render('project/showAllPosts.html.twig', ['posts' => $posts]);
+        echo $this->twig->render('project/showAllPosts.html.twig', 
+                                ['posts' => $posts]);
     }
 
     // Upload d'image adaptation meth PHP
@@ -102,15 +104,15 @@ class PostController extends AbstractController
 
             // Check $_FILES['upfile']['error'] value.
             switch ($files['picture']['error']) {
-                case UPLOAD_ERR_OK:
-                    break;
-                case UPLOAD_ERR_NO_FILE:
-                    throw new \RuntimeException('Fichier non trouvé');
-                case UPLOAD_ERR_INI_SIZE:
-                case UPLOAD_ERR_FORM_SIZE:
-                    throw new \RuntimeException('La taille de l\image ne correspond pas');
-                default:
-                    throw new \RuntimeException('Erreur inconnue');
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                throw new \RuntimeException('Fichier non trouvé');
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                throw new \RuntimeException('La taille de l\image ne correspond pas');
+            default:
+                throw new \RuntimeException('Erreur inconnue');
             }
 
             // Verification de la taille
@@ -176,7 +178,8 @@ class PostController extends AbstractController
                 $this->postManager->edit($id, $title, $text, $picture);
             }
         }
-        echo $this->twig->render('post/edit.html.twig', ["error"=> $errors, "post"=>$post]);
+        echo $this->twig->render('post/edit.html.twig', 
+                                ["error"=> $errors, "post"=>$post]);
     }
 
     // Supprimer un post grace a l'id

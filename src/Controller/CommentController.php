@@ -19,7 +19,11 @@ class CommentController extends AbstractController
     }
 
 
-    // creation de comment
+    /**
+     * creation de comment
+     *
+     * @return void
+     */
     public function create($id)
     {
         //methode dans abstract
@@ -32,7 +36,8 @@ class CommentController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['text'])) {
-                $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";   
+                $errors["errorsChamps"] = "Un des champs n'est pas correctement 
+                                        remplit";   
             } elseif ($token != $_POST['token']) {
                 $errors["errorToken"] = "Le token n'est pas valide";
             } else {
@@ -50,14 +55,24 @@ class CommentController extends AbstractController
         header(sprintf('Location:/post/%s', $id['id']));
     }
 
-    // Afficher tout les comments grace a la methode findAll
+    /**
+     * Afficher tout les comments grace a la methode findAll
+     *
+     * @return void
+     */
     public function findAllComment()
     {
         $comments = $this->commentManager->findAll(1);
 
-        echo $this->twig->render('comment/showAllComment.html.twig', ['comments' => $comments]);
+        echo $this->twig->render('comment/showAllComment.html.twig', 
+                                        ['comments' => $comments]);
     }
 
+    /**
+     * Afficher tout les comments grace a la methode findAll
+     *
+     * @return void
+     */
     public function delete($parameter)
     {
         $comment = $this->commentManager->findOneComment($parameter['id']);

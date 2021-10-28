@@ -32,8 +32,11 @@ class PostManager extends Database
 
         $statement->execute();
     }
-
-    // Récuperation du post via le titre
+    /**
+     * Récuperation du post via le titre
+     *
+     * @return void
+     */
     public function getPostByTitle($title)
     {
         // prepared request
@@ -54,7 +57,12 @@ class PostManager extends Database
     // Récuperation des posts validé
     public function getValidatePost()
     {
-        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, post.picture, post.date_creation, post.status, post.date_update, post.author, users.username FROM post INNER JOIN users ON post.author = users.id WHERE post.status = 1 ORDER BY post.date_creation ASC');
+        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, 
+                    post.picture, post.date_creation, post.status, post.date_update,
+                    post.author, users.username FROM post INNER JOIN users ON 
+                    post.author = users.id WHERE post.status = 1 
+                    ORDER BY post.date_creation ASC');
+
         $statement->execute();
         $data = $statement->fetchAll();
 
@@ -75,7 +83,11 @@ class PostManager extends Database
     // Récuperation un post grace a l'id
     public function findOnePost($id)
     {
-        $statement = $this->pdo->prepare("SELECT post.id, post.title, post.picture, post.text, post.date_creation, post.date_update, post.status, post.author, users.username FROM $this->table INNER JOIN users ON post.author = users.id WHERE post.id=:id");
+        $statement = $this->pdo->prepare("SELECT post.id, post.title, 
+                    post.picture, post.text, post.date_creation, post.date_update,
+                    post.status, post.author, users.username FROM $this->table 
+                    INNER JOIN users ON post.author = users.id WHERE post.id=:id");
+
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         $statement->execute();
@@ -95,7 +107,10 @@ class PostManager extends Database
     // Récuperation des posts en attente de validation
     public function findAllArticle($status = null)
     {
-        $sql = 'SELECT post.id, post.title, post.picture, post.text, post.date_creation, post.date_update, post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id';
+        $sql = 'SELECT post.id, post.title, post.picture, post.text, 
+                post.date_creation, post.date_update, post.status, 
+                post.author, users.username FROM post INNER JOIN users 
+                ON post.author = users.id';
 
         // si l'article existe alors concatene avec where pour filtrer
         if ($status) {
@@ -135,7 +150,11 @@ class PostManager extends Database
     // Récuperation des posts par l'id de l'auteur
     public function getAllByAuthorId($author)
     {
-        $statement = $this->pdo->prepare('SELECT post.id, post.title, post.text, post.picture, post.date_creation, post.date_update, post.status, post.author, users.username FROM post INNER JOIN users ON post.author = users.id WHERE post.author = :id');
+        $statement = $this->pdo->prepare('SELECT post.id, post.title, 
+                    post.text, post.picture, post.date_creation, post.date_update, 
+                    post.status, post.author, users.username FROM post INNER JOIN users 
+                    ON post.author = users.id WHERE post.author = :id');
+
         $statement->bindValue('id', $author, \PDO::PARAM_INT);
 
         $statement->execute();
@@ -155,12 +174,16 @@ class PostManager extends Database
         return false;
     }
 
-    // Modifier un post grace a l'id
+    /**
+     * Modifier un post grace a l'id
+     *
+     * @return void
+     */
     public function edit($id, $title, $text, $picture)
     {
-        $statement = $this->pdo->prepare("UPDATE $this->table SET
-          title=:title, text=:text, picture=:picture, date_update=:date_update
-         WHERE id=:id");
+        $statement = $this->pdo->prepare("UPDATE $this->table 
+                    SET title=:title, text=:text, picture=:picture, date_update=:date_update
+                    WHERE id=:id");
         $statement->bindValue('id', $id['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $title, \PDO::PARAM_STR);
         $statement->bindValue('text', $text, \PDO::PARAM_STR);
@@ -170,10 +193,16 @@ class PostManager extends Database
         $statement->execute();
     }
 
-    // Effacer un post grace a l'id
+    /**
+     * Effacer un post grace a l'id
+     *
+     * @return void
+     */
     public function delete($id)
     {
-        $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE post.id=:id ADD CONSTRAINT fk_comment_post FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE");
+        $statement = $this->pdo->prepare("DELETE FROM $this->table 
+                    WHERE post.id=:id ADD CONSTRAINT fk_comment_post 
+                    FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE");
 
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 

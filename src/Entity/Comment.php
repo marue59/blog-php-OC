@@ -4,6 +4,9 @@ namespace Portfolio\Entity;
 
 use Model\CommentManager;
 
+/**
+ * Classe Commentaire.
+ */
 class Comment
 {
     private $id;
@@ -134,7 +137,12 @@ class Comment
 
         return $this;
     }
-
+    
+    /**
+     * Hydratation des données
+     *
+     * @return void
+     */
     public function hydrate($data)
     {
         $this->id = $data['id'];
