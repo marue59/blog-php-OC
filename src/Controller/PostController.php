@@ -24,10 +24,10 @@ class PostController extends AbstractController
         parent::__construct();
     }
 
-    // creation de post
+    // Creation de post
     public function create()
     {
-        //methode dans abstract
+        // Methode dans abstract
         $this->generateToken();
 
         $errors = [

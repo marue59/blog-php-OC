@@ -16,7 +16,7 @@ class UserManager extends Database
 
     
     /**
-     * create user
+     * Create user
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class UserManager extends Database
         $userPassword = trim(htmlspecialchars($user['password']));
         $safePassword = password_hash($userPassword, PASSWORD_DEFAULT);
 
-        // prepared request
+        // Prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
             (username, email, password, status) 
             VALUES (:username, :email, :password, :status)");
@@ -44,7 +44,7 @@ class UserManager extends Database
      */
     public function getByEmail(string $email)
     {
-        // prepared request
+        // Prepared request
         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE email=:email");
         $statement->bindValue('email', $email, \PDO::PARAM_STR);
         $statement->execute();
@@ -69,7 +69,7 @@ class UserManager extends Database
     {
         $sql = 'SELECT * FROM users';
 
-        // si status existe alors concatene avec where
+        // Si status existe alors concatene avec where
         if ($status) {
             $sql .= " WHERE status = $status";
         }

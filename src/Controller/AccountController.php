@@ -27,7 +27,7 @@ class AccountController extends AbstractController
     {
         $this ->isLogged();
 
-        //defini une variable
+        //Defini une variable
         $author = $_SESSION["id"];
 
         $posts = $this->postManager->getAllByAuthorId($author);

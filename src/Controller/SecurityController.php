@@ -24,11 +24,11 @@ class SecurityController extends AbstractController
         parent::__construct();
     }
 
-    // login
+    // Login
     public function login()
     {
-         //generer un token uniqu a chaque form
-        // si le token n'est pas en session on le genere et on le met en session
+         // Generer un token uniqu a chaque form
+        // Si le token n'est pas en session on le genere et on le met en session
 
         if (!isset($_SESSION['token'])) {
             $token = md5(uniqid(rand(), true));
@@ -51,7 +51,7 @@ class SecurityController extends AbstractController
                 $userManager = new UserManager();
                 $user = $userManager->getByEmail($email);
 
-                //si le status est 1 ou 2 et u'il est validé et que l'email est valide que le pass est bon on autorise
+                // Si le status est 1 ou 2 et u'il est validé et que l'email est valide que le pass est bon on autorise
                 if ($user && in_array($user ->getStatus(), [1, 2])
                      && filter_var($email, FILTER_VALIDATE_EMAIL) 
                      && password_verify($password, $user->getPassword())) {
@@ -78,11 +78,11 @@ class SecurityController extends AbstractController
         echo $this->twig->render('security/login.html.twig', ['error' => $errors]);
     }
 
-    // creation de compte
+    // Creation de compte
     public function create()
     {  
-         //generer un token uniqu a chaque form
-        // si le token n'est pas en session on le genere et on le met en session
+         // Generer un token uniqu a chaque form
+        // Si le token n'est pas en session on le genere et on le met en session
 
         if (!isset($_SESSION['token'])) {
             $token = md5(uniqid(rand(), true));
@@ -137,7 +137,7 @@ class SecurityController extends AbstractController
         echo $this->twig->render('security/create.html.twig', ["error"=> $errors]);
     }
 
-    //logout
+    // Logout
     public function logout()
     {
         session_destroy();

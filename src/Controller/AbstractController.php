@@ -20,13 +20,13 @@ abstract class AbstractController
                 'debug' => true,
             ]
         );
-        // utilisation de methode globale de twig
+        // Utilisation de methode globale de twig
         $this->twig->addGlobal('session', $_SESSION);
         $this->twig->addExtension(new DebugExtension());
     }
     
     /**
-     *  verifier si le user est connecté
+     *  Verifier si le user est connecté
      *
      * @return void
      */
@@ -38,7 +38,7 @@ abstract class AbstractController
     }
 
     /**
-     *  génération du token
+     *  Génération du token
      *
      * @return void
      */
