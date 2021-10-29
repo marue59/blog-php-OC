@@ -28,7 +28,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * voir tout les user en attente de validation
+     * Voir tout les user en attente de validation
      *
      * @return void
      */
@@ -48,7 +48,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * voir le user selectionné grace a l'id et lui changer le statut
+     * Voir le user selectionné grace a l'id et lui changer le statut
      *
      * @return void
      */
@@ -63,7 +63,7 @@ class AdminController extends AbstractController
 
     
     /**
-     * voir tout les articles en attente de validation
+     * Voir tout les articles en attente de validation
      *
      * @return void
      */
@@ -83,7 +83,7 @@ class AdminController extends AbstractController
 
 
     /**
-     * voir l'article selectionné grace a l'id et lui changer le statut      
+     * Voir l'article selectionné grace a l'id et lui changer le statut      
      *
      * @return void
      */
@@ -98,7 +98,7 @@ class AdminController extends AbstractController
 
 
     /**
-     * voir tout les comments en attente de validation 
+     * Voir tout les comments en attente de validation 
      *
      * @return void
      */
@@ -119,7 +119,7 @@ class AdminController extends AbstractController
 
     // 
     /**
-     * voir le comment selectionné grace a l'id et lui changer le statut
+     * Voir le comment selectionné grace a l'id et lui changer le statut
      * 
      * @return void
      */

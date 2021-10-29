@@ -27,7 +27,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * connexion
+     * Connexion
      *
      * @return void
      */
@@ -43,7 +43,7 @@ class FrontController extends AbstractController
 
     public function contact()
     {
-         //methode dans abstract
+         // Methode dans abstract
         $this->generateToken();
        
         $errors = [ "errorUsername" => "",

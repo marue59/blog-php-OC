@@ -19,10 +19,10 @@ class CommentController extends AbstractController
     }
 
 
-    // creation de comment
+    // Creation de comment
     public function create($id)
     {
-        //methode dans abstract
+        // Methode dans abstract
         $this->generateToken();
         
         $errors = [
@@ -46,7 +46,7 @@ class CommentController extends AbstractController
                 unset($_SESSION['token']);
             }
         }
-        //fonction sprint formate en string
+        // Fonction sprint formate en string
         // %s attente d'une variable
         header(sprintf('Location:/post/%s', $id['id']));
     }
@@ -56,14 +56,15 @@ class CommentController extends AbstractController
     {
         $comments = $this->commentManager->findAll(1);
 
-        echo $this->twig->render('comment/showAllComment.html.twig', ['comments' => $comments]);
+        echo $this->twig->render('comment/showAllComment.html.twig', 
+                                ['comments' => $comments]);
     }
 
     public function delete($parameter)
     {
         $comment = $this->commentManager->findOneComment($parameter['id']);
 
-        //si l'auteur n'est pas la perso authentifié alors
+        // Si l'auteur n'est pas la perso authentifié alors
         if ($comment->getAuthor() != $_SESSION['id'] || $_SESSION["status"] != 1) {
             echo "Vous n'etes pas autorisé";
             exit();
