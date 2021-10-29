@@ -44,7 +44,7 @@ class FrontController extends AbstractController
     public function contact()
     {
          //methode dans abstract
-       $this->generateToken();
+        $this->generateToken();
        
         $errors = [ "errorUsername" => "",
                     "errorEmail" => "",

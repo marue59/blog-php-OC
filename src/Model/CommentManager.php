@@ -33,9 +33,7 @@ class CommentManager extends Database
 
     public function findAll($status = null)
     {
-        $sql = 'SELECT comment.id, comment.text, comment.date_creation, comment.status, 
-                comment.author, users.username FROM comment INNER JOIN users 
-                ON comment.author = users.id';
+        $sql = 'SELECT comment.id, comment.text, comment.date_creation, comment.status, comment.author, users.username  FROM comment INNER JOIN users ON comment.author = users.id ';
 
         if ($status) {
             $sql .= " WHERE comment.status = $status";
@@ -71,11 +69,7 @@ class CommentManager extends Database
     // Récuperation d'un com grace a l 'id
     public function findOneComment($id)
     {
-        $statement = $this->pdo->prepare("SELECT comment.id, comment.text, 
-                    comment.date_creation, comment.status, comment.author, 
-                    users.username FROM $this->table INNER JOIN users 
-                    ON comment.author = users.id WHERE comment.id=:id");
-
+        $statement = $this->pdo->prepare("SELECT comment.id, comment.text, comment.date_creation, comment.status, comment.author, users.username FROM $this->table INNER JOIN users ON comment.author = users.id WHERE comment.id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         $statement->execute();
@@ -100,18 +94,10 @@ class CommentManager extends Database
         $statement->execute();
     }
 
-    /**
-     * findBy recupere le post id
-     *
-     * @return void
-     */
+    // findBy recupere le post id
     public function findBy($post_id, $status = null)
     {
-        $sql = "SELECT comment.id, comment.text, comment.date_creation, 
-                comment.status, comment.author, users.username 
-                FROM $this->table INNER JOIN users ON comment.author = users.id 
-                WHERE post_id = :post_id";
-
+        $sql = "SELECT comment.id, comment.text, comment.date_creation, comment.status, comment.author, users.username FROM $this->table INNER JOIN users ON comment.author = users.id WHERE post_id = :post_id";
         if ($status) {
             $sql .= " AND comment.status = :status";
         }
