@@ -1,3 +1,6 @@
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2775eb33939d468aa96c5867866b8fc6)](https://app.codacy.com/gh/marue59/blog-php-OC?utm_source=github.com&utm_medium=referral&utm_content=marue59/blog-php-OC&utm_campaign=Badge_Grade_Settings)
+
 Projet 5 : Créez votre premier blog en PHP
 
 1.Clone the repo from Github.
