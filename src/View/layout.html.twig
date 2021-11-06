@@ -71,9 +71,11 @@
         <footer> 
             <div class="mt-5 bg-light text-center">
                 {% block footer %}
-                    <p>&copy; Copyright 2021 </p>
-                    <a href="http://mariede.fr">
-                    Marie De</a>
+                <div class="d-flex flex-column">
+                    <a href="/connexion" class="m-3">Connexion a l'administration</a>
+                    <a href="http://mariede.fr">Marie De</a>
+                    <p class="m-3">&copy; Copyright 2021 </p>
+                </div>
                 {% endblock %}  
             </div>
         </footer>
