@@ -201,8 +201,7 @@ class PostManager extends Database
     public function delete($id)
     {
         $statement = $this->pdo->prepare("DELETE FROM $this->table 
-                    WHERE post.id=:id ADD CONSTRAINT fk_comment_post 
-                    FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE");
+                    WHERE post.id=:id");
 
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
