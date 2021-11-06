@@ -56,7 +56,8 @@ class FrontController extends AbstractController
             if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['text'])) {
                 $errors["errorUsername"] = "Vous n'avez pas remplit votre nom";
                 $errors["errorEmail"] = "Vous n'avez pas remplit votre email";
-            } elseif ($token != $_POST["token"]) {
+                //si j'ai posté un token et que le token en session est different du token posté
+            } elseif (isset($_POST['token']) && $_SESSION['token'] != $_POST["token"]) {
                 $errors["errorToken"] = "Le token n'est pas valide";
             } else {
                 $username = trim(htmlspecialchars($_POST["username"]));
@@ -75,14 +76,24 @@ class FrontController extends AbstractController
                 $message = (new Swift_Message('Nouveau message de contact'))
                     ->setFrom($email)
                     ->setTo(GOOGLE_MAIL)
-                    ->setBody($username, $email, $text);
+                    ->setBody($this->twig->render('project/mail.html.twig', ['username' => $username, 
+                                                                                'email'=>$email, 
+                                                                                'text'=>$text]), 'text/html');
                
                 // Send the message
-                $result = $mailer->send($message);
+                try {
+                    $result = $mailer->send($message);
+                    header('Location:/');
+                    exit;
+
+                } catch (Exception $e) {
+                    $errors["errorToken"] = "Erreur lors de l'envoi de l'email";
+                }
+
                 unset($_SESSION['token']);
             }
-            header('Location:/');
+            
         }
-        echo $this->twig->render('project/contact.html.twig');
+        echo $this->twig->render('project/contact.html.twig', ['error' => $errors]);
     }
 }

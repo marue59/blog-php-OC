@@ -33,7 +33,7 @@ class CommentController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['text'])) {
                 $errors["errorsChamps"] = "Un des champs n'est pas correctement remplit";   
-            } elseif ($token != $_POST['token']) {
+            } elseif (isset($_POST['token']) && $_SESSION['token'] != $_POST['token']) {
                 $errors["errorToken"] = "Le token n'est pas valide";
             } else {
                 $comment = [
@@ -64,14 +64,16 @@ class CommentController extends AbstractController
     {
         $comment = $this->commentManager->findOneComment($parameter['id']);
 
-        // Si l'auteur n'est pas la perso authentifié alors
-        if ($comment->getAuthor() != $_SESSION['id'] || $_SESSION["status"] != 1) {
-            echo "Vous n'etes pas autorisé";
-            exit();
+        //si tu es l'admin et si tu es le proprietaire du commentaire on peut effacer
+        if ($comment->getAuthor() == $_SESSION['id'] || $_SESSION["status"] = 1) {
+            
+            $comment = $this->commentManager->delete($parameter['id']);
+
+            header('Location:/post/'. $id . '/all-comment');
+            
         }
 
-        $comment = $this->commentManager->delete($parameter['id']);
-
-        header('Location:/post/'. $id . '/all-comment');
+        echo "Vous n'etes pas autorisé";
+        exit();
     }
 }

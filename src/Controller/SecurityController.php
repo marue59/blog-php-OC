@@ -27,15 +27,8 @@ class SecurityController extends AbstractController
     // Login
     public function login()
     {
-         // Generer un token uniqu a chaque form
-        // Si le token n'est pas en session on le genere et on le met en session
-
-        if (!isset($_SESSION['token'])) {
-            $token = md5(uniqid(rand(), true));
-
-            // On le stock en session
-            $_SESSION['token'] = $token;
-        }
+         // Methode dans abstract
+         $this->generateToken();
 
         $errors = [
             "errorEmail" => "",
@@ -65,7 +58,7 @@ class SecurityController extends AbstractController
                     }
                     header('Location:/mon-compte');
 
-                  } elseif ($token != $_POST["token"]) {
+                  } elseif (isset($_POST['token']) && $_SESSION['token'] != $_POST["token"]) {
                     $errors["errorToken"] = "Le token n'est pas valide";
                 } else {
                     $errors["errorMdp"]= "Votre compte est en attente de validation, merci de patienter...";
@@ -113,7 +106,7 @@ class SecurityController extends AbstractController
 
                 if ($user) {
                     $errors["errorMail"] = "L'adresse mail existe déja";
-                } elseif ($token != $_POST["token"]) {
+                } elseif (isset($_POST['token']) && $_SESSION['token'] != $_POST["token"]) {
                     $errors["errorToken"] = "Le token n'est pas valide";
                 } else {
                     $user = [

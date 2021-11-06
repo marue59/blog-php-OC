@@ -186,15 +186,14 @@ class PostController extends AbstractController
     public function delete($parameter)
     {
         $post = $this->postManager->findOnePost($parameter['id']);
-        //var_dump($post);die;
-        //si l'auteur n'est pas la perso authentifié alors
-        if ($post->getAuthor() != $_SESSION['id'] || $_SESSION['status' == '2']) {
-            echo "Vous n'etes pas autorisé";
-            exit();
+        //si tu es l'admin et si tu es le proprietaire du post on peut effacer
+        if ($post->getAuthor() == $_SESSION['id'] || $_SESSION['status'] == 1) {
+            $post = $this->postManager->delete($parameter['id']);
+
+            header('Location:/mon-compte');
         }
 
-        $post = $this->postManager->delete($parameter['id']);
-
-        header('Location:/mon-compte');
+       echo "Vous n'etes pas autorisé";
+            exit();
     }
 }

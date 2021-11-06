@@ -9,8 +9,13 @@
             {% if error.errorEmail is not empty %}
             <div class="alert alert-warning" role="alert">
                 {{ error.errorEmail}}{{ error.errorUsername}}
-            {% endif %} 
             </div>
+            {% endif %} 
+            {% if error.errorToken is not empty %}
+            <div class="alert alert-warning" role="alert">
+                {{ error.errorToken}}
+            </div>
+            {% endif %} 
             {%if session.token is not empty%} 
                 <input class="form-control" type="hidden" name="token" value={{session.token}}>
             {%endif%}
