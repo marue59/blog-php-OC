@@ -63,9 +63,9 @@ class CommentController extends AbstractController
     public function delete($parameter)
     {
         $comment = $this->commentManager->findOneComment($parameter['id']);
-
+//var_dump($comment);die();
         //si tu es l'admin et si tu es le proprietaire du commentaire on peut effacer
-        if ($comment->getAuthor() == $_SESSION['id'] || $_SESSION["status"] = 1) {
+        if ($comment->getAuthor() == $_SESSION['id'] || $_SESSION["status"] == 1) {
             
             $comment = $this->commentManager->delete($parameter['id']);
 

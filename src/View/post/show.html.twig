@@ -48,7 +48,7 @@
                         <p class="card-text text-end">{{ comment.dateCreation | date("d/m/Y") }}</p>                        
                         <p class="card-text text-end">Auteur : {{ comment.username }}</p>
                         {% if session.id == comment.author %}
-                            <p class="card-text text-center"><a href="/post/{{ post.id }}/all-comment/delete" class="btn btn-dark">Supprimer</a></p>
+                            <p class="card-text text-center"><a href="/post/{{ comment.id }}/all-comment/delete" class="btn btn-dark">Supprimer</a></p>
                         {% endif %}
                     </div>
                 </div>

@@ -11,7 +11,7 @@ define('APP_DB_USER', 'your_db_user_wich_is_not_root');
 define('APP_DB_PWD', 'your_db_password');
 ```
 
-4.Install MySQL and import `Portfolio.sql` in your SQL server,
+4.Install MySQL and import `Portfolio.sql` in your SQL server in public/bdD/Portfolio.sql
 
 5.Run the internal PHP webserver with `php -S localhost:8000`.
 6.Go to `localhost:8000` with your favorite browser.
